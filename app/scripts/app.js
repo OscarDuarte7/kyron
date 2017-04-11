@@ -34,12 +34,12 @@ angular
     'ui.utils.masks',
     'pascalprecht.translate'
   ])
-    .run(function(amMoment) {
-      amMoment.changeLocale('es');
-    })
-    .config(['$locationProvider','$routeProvider', function($locationProvider, $routeProvider) {
-      $locationProvider.hashPrefix("");
-      $routeProvider
+  .run(function (amMoment) {
+    amMoment.changeLocale('es');
+  })
+  .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
+    $locationProvider.hashPrefix("");
+    $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
@@ -55,7 +55,26 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/crear_formacion_academica', {
+        templateUrl: 'views/crear_formacion_academica.html',
+        controller: 'CrearFormacionAcademicaCtrl',
+        controllerAs: 'crearFormacionAcademica'
+      })
       .otherwise({
         redirectTo: '/'
       });
   }]);
+
+angular.module('kyronApp').run(function ($rootScope) {
+
+  $rootScope.id;
+
+
+
+
+
+
+
+
+
+});

@@ -17,7 +17,17 @@ angular.module('kyronApp')
     $scope.actual = "";
     $scope.token_service = token_service;
     $scope.breadcrumb = [];
-    $scope.menu_service = [{ //aqui va el servicio de el app de configuracion
+    $scope.menu_service = [{
+      "Id":1,
+      "Nombre": "Formación Académica",
+      "Url":"",
+      "Opciones": [{
+      "Id":1,
+      "Nombre": " Crear Formación Académica",
+      "Url":"crear_formacion_academica",
+      "Opciones": null
+      }]
+    },{ //aqui va el servicio de el app de configuracion
       "Id": 2,
       "Nombre": "nivel 1",
       "Url": "url_nivel_1",
