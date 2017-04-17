@@ -28,6 +28,7 @@ angular
     'ui.grid.treeView',
     'ui.grid.selection',
     'ui.grid.exporter',
+    'ui.grid.grouping',
     'ngStorage',
     'ngWebSocket',
     'angularMoment',

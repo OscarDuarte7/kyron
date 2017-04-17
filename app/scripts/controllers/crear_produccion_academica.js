@@ -8,7 +8,7 @@
  * Controller of the kyronApp
  */
 angular.module('kyronApp')
-  .controller('CrearProduccionAcademicaCtrl', function (produccionAcademicaServices, $rootScope) {
+  .controller('CrearProduccionAcademicaCtrl', function (produccionAcademicaServices, $rootScope, $scope,$timeout, uiGridConstants) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -73,11 +73,21 @@ angular.module('kyronApp')
       });
     };
 
+    var get_dato_produccion = function () {
+      produccionAcademicaServices.get('dato_produccion', $.param({
+        query: "ProduccionAcademicaId.PersonaId:" + self.id + ",ProduccionAcademicaId.Vigente:" + true,
+        limit: 0
+      })).then(function (response) {
+        self.gridOptionsDatoSubtipo.data = response.data;
+      });
+    };
+
 
     get_produccion_academica();
     get_tipo_produccion();
     get_subtipo_produccion();
     get_opcion_dato();
+    get_dato_produccion();
 
 
     self.gridOptions.onRegisterApi = function (gridApi) {
@@ -90,6 +100,25 @@ angular.module('kyronApp')
     };
 
 
+    self.gridOptionsDatoSubtipo = {};
+    self.gridOptionsDatoSubtipo.enableFiltering = true;
+    self.gridOptionsDatoSubtipo.treeRowHeaderAlwaysVisible = false;
+    self.gridOptionsDatoSubtipo.columnDefs = [
+      { field: 'ProduccionAcademicaId.TituloProduccion', displayName: 'Titulo Producción', cellTemplate: '<div ng-if="!col.grouping || col.grouping.groupPriority === undefined || col.grouping.groupPriority === null || ( row.groupHeader && col.grouping.groupPriority === row.treeLevel )" class="ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>', width: 200 },
+      // pre-populated search field
+      { field: 'DatoSubtipoId.DatoId.Nombre', displayName: 'Dato', width: 300 },
+      // no filter input
+      { field: 'Valor', headerCellClass: $scope.highlightFilteredHeader,cellFilter: 'filtroDatoProduccion:this' , width: 300 }
+    ];
+    self.gridOptionsDatoSubtipo.onRegisterApi = function (gridApi) {
+      $timeout(function () {
+        gridApi.grouping.clearGrouping();
+        gridApi.grouping.groupColumn('ProduccionAcademicaId.TituloProduccion');
+        gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+      });
+    };
+
+
 
 
     self.getDatoSubtipo = function (idSubtipo) {
@@ -97,18 +126,18 @@ angular.module('kyronApp')
         query: "SubtipoProduccion:" + idSubtipo
       });
       produccionAcademicaServices.get("dato_subtipo", self.paramSubtipoProduccion).then(function (response) {
-        self.infoDatoSubtipo = response.data;
+        $scope.infoDatoSubtipo = response.data;
 
-        self.infoInput = [];
-        self.infoSelect = [];
-        for (var i = 0; i < self.infoDatoSubtipo.length; i++) {
-          self.infoDatoSubtipo[i].Dominio = JSON.parse(self.infoDatoSubtipo[i].Dominio);
-          switch (self.infoDatoSubtipo[i].Dominio.Entrada) {
+        $scope.infoInput = [];
+        $scope.infoSelect = [];
+        for (var i = 0; i < $scope.infoDatoSubtipo.length; i++) {
+          $scope.infoDatoSubtipo[i].Dominio = JSON.parse($scope.infoDatoSubtipo[i].Dominio);
+          switch ($scope.infoDatoSubtipo[i].Dominio.Entrada) {
             case "input":
-              self.infoInput.push(self.infoDatoSubtipo[i]);
+              $scope.infoInput.push($scope.infoDatoSubtipo[i]);
               break;
             case "select":
-              self.infoSelect.push(self.infoDatoSubtipo[i]);
+              $scope.infoSelect.push($scope.infoDatoSubtipo[i]);
               break;
 
           }
@@ -119,34 +148,44 @@ angular.module('kyronApp')
     };
 
 
+
     self.guardar = function () {
+      var dataProduccionAcademica = {
+             "Ciudad": $scope.ciudad,
+             "NumeroAutores": $scope.numeroAutores,
+             "Pais": $scope.pais,
+             "PersonaId": self.id,
+             "SubtipoProduccionId": {
+               "Id": $scope.subtipoProduccion
+             },
+             "TituloProduccion": $scope.tituloProduccion,
+             "FechaProduccion": $scope.fechaProduccion,
+             "Validacion": false,
+             "FechaDato" : new Date(),
+             "Vigente" : true
+           }
 
-      var dataDatoProduccion = [];
 
-      for (var i = 0; i < self.infoInput.length; i++) {
+           var dataDatoProduccion = [];
+
+           for (var i = 0; i < $scope.infoInput.length; i++) {
 
 
-        dataDatoProduccion.push({
-          "DatoSubtipoId": { "Id": self.infoInput[i].Id },
-          "Valor": self.infoInput[i].Dominio.Valor.toString()
-        });
-      }
+             dataDatoProduccion.push({
+               "DatoSubtipoId": { "Id": $scope.infoInput[i].Id },
+               "Valor": $scope.infoInput[i].Dominio.Valor.toString()
+             });
+           }
 
-      for (var j = 0; j < self.infoSelect.length; j++) {
+           for (var j = 0; j < $scope.infoSelect.length; j++) {
 
-        dataDatoProduccion.push({
-          "DatoSubtipoId": { "Id": self.infoSelect[j].Id },
-          "Valor": self.infoSelect[j].Dominio.Valor.toString()
-        });
-      }
+             dataDatoProduccion.push({
+               "DatoSubtipoId": { "Id": $scope.infoSelect[j].Id },
+               "Valor": $scope.infoSelect[j].Dominio.Valor.toString()
+             });
+           }
 
-      self.tr_produccion_academica.DatoProduccion = dataDatoProduccion;
-      self.tr_produccion_academica.ProduccionAcademica.PersonaId = self.id;
-      self.tr_produccion_academica.ProduccionAcademica.FechaDato = new Date();
-      self.tr_produccion_academica.ProduccionAcademica.Validacion = false;
-      self.tr_produccion_academica.ProduccionAcademica.Vigente = true;
-
-      produccionAcademicaServices.post("tr_produccion_academica", { ProduccionAcademica: self.tr_produccion_academica.ProduccionAcademica})
+           produccionAcademicaServices.post("tr_produccion_academica", { ProduccionAcademica: dataProduccionAcademica, DatoProduccion: dataDatoProduccion })
         .then(function (response) {
         console.log(response);
           if (response.status === 201) {
@@ -156,6 +195,7 @@ angular.module('kyronApp')
               'success'
             );
             get_produccion_academica();
+            get_dato_produccion();
           } else {
             swal(
               'Ha ocurrido un error',
