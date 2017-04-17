@@ -60,6 +60,36 @@ angular
         controller: 'CrearFormacionAcademicaCtrl',
         controllerAs: 'crearFormacionAcademica'
       })
+      .when('/editar_formacion_academica', {
+        templateUrl: 'views/editar_formacion_academica.html',
+        controller: 'EditarFormacionAcademicaCtrl',
+        controllerAs: 'editarFormacionAcademica'
+      })
+      .when('/consultar_formacion_academica', {
+        templateUrl: 'views/consultar_formacion_academica.html',
+        controller: 'ConsultarFormacionAcademicaCtrl',
+        controllerAs: 'consultarFormacionAcademica'
+      })
+      .when('/crear_experiencia_laboral', {
+        templateUrl: 'views/crear_experiencia_laboral.html',
+        controller: 'CrearExperienciaLaboralCtrl',
+        controllerAs: 'crearExperienciaLaboral'
+      })
+      .when('/editar_experiencia_laboral', {
+        templateUrl: 'views/editar_experiencia_laboral.html',
+        controller: 'EditarExperienciaLaboralCtrl',
+        controllerAs: 'editarExperienciaLaboral'
+      })
+      .when('/consultar_experiencia_laboral', {
+        templateUrl: 'views/consultar_experiencia_laboral.html',
+        controller: 'ConsultarExperienciaLaboralCtrl',
+        controllerAs: 'consultarExperienciaLaboral'
+      })
+      .when('/crear_produccion_academica', {
+        templateUrl: 'views/crear_produccion_academica.html',
+        controller: 'CrearProduccionAcademicaCtrl',
+        controllerAs: 'crearProduccionAcademica'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -67,7 +97,7 @@ angular
 
 angular.module('kyronApp').run(function ($rootScope) {
 
-  $rootScope.id;
+  $rootScope.id =123;
 
 
 

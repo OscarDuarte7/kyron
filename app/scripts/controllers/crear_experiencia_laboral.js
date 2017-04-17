@@ -2,24 +2,23 @@
 
 /**
  * @ngdoc function
- * @name kyronApp.controller:CrearFormacionAcademicaCtrl
+ * @name kyronApp.controller:CrearExperienciaLaboralCtrl
  * @description
- * # CrearFormacionAcademicaCtrl
+ * # CrearExperienciaLaboralCtrl
  * Controller of the kyronApp
  */
 angular.module('kyronApp')
-  .controller('CrearFormacionAcademicaCtrl', function (formacionAcademicaServices, $rootScope) {
+  .controller('CrearExperienciaLaboralCtrl', function (experienciaLaboralServices, $rootScope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-    $rootScope.id = 123;
 
-    var self = this;
+     var self = this;
     self.id = $rootScope.id;
     self.vista_previa = false;
-    self.formacion_academica = {};
+    self.experiencia_laboral = {};
     self.gridOptions = {
       enableFiltering: true,
       enableSorting: true,
@@ -29,7 +28,7 @@ angular.module('kyronApp')
         field: 'InstitucionId.NombreInstitucion', displayName: 'Institución', width: 400
       },
       {
-        field: 'ProgramaId.NombrePrograma', displayName: 'Programa', width: 200
+        field: 'Cargo', displayName: 'Cargo', width: 200
       },
       {
         field: 'FechaInicio', displayName: 'Fecha Inicio', cellFilter: 'date:"yyyy-MM-dd"', width: 100
@@ -37,20 +36,11 @@ angular.module('kyronApp')
       {
         field: 'FechaFinalizacion', displayName: 'Fecha Finalización', cellFilter: 'date:"yyyy-MM-dd"', width: 100
       },
-      {
-        field: 'Titulo.Nombre', displayName: 'Título', width: 300
-      },
-      {
-        field: 'NombreProyecto', displayName: 'Nombre Proyecto', width: 500
-      },
-      {
-        field: 'AreaConocimiento', displayName: 'Área de Conocimiento', width: 200
-      },
       ]
     };
     self.gridOptions.multiSelect = false;
-    var get_formacion_academica = function () {
-      formacionAcademicaServices.get('formacion_academica', $.param({
+    var get_experiencia_laboral = function () {
+      experienciaLaboralServices.get('experiencia_laboral', $.param({
         query: "PersonaId:" + self.id + ",Vigente:" + true,
         limit: 0
       })).then(function (response) {
@@ -60,26 +50,15 @@ angular.module('kyronApp')
     };
 
     var get_institucion = function () {
-      formacionAcademicaServices.get('institucion', 'limit=0').then(function (response) {
+      experienciaLaboralServices.get('institucion', 'limit=0').then(function (response) {
         self.institucion = response.data;
       });
     };
 
-    var get_programa = function () {
-      formacionAcademicaServices.get('programa', 'limit=0').then(function (response) {
-        self.programa = response.data;
-      });
-    };
 
-    var get_titulo = function () {
-      formacionAcademicaServices.get('titulo', 'limit=0').then(function (response) {
-        self.titulo = response.data;
-      });
-    };
-    get_formacion_academica();
+    get_experiencia_laboral();
     get_institucion();
-    get_programa();
-    get_titulo();
+
 
     self.gridOptions.onRegisterApi = function (gridApi) {
       self.gridApi = gridApi;
@@ -87,15 +66,15 @@ angular.module('kyronApp')
 
     self.limpiar_seleccion = function () {
       self.vista_previa = !self.vista_previa;
-      self.formacion_academica = {};
+      self.experiencia_laboral = {};
     };
 
     self.guardar = function () {
-      self.formacion_academica.PersonaId = self.id;
-      self.formacion_academica.FechaDato = new Date();
-      self.formacion_academica.Validacion = false;
-      self.formacion_academica.Vigente = true;
-      formacionAcademicaServices.post('formacion_academica', self.formacion_academica)
+      self.experiencia_laboral.PersonaId = self.id;
+      self.experiencia_laboral.FechaDato = new Date();
+      self.experiencia_laboral.Validacion = false;
+      self.experiencia_laboral.Vigente = true;
+      experienciaLaboralServices.post('experiencia_laboral', self.experiencia_laboral)
         .then(function (response) {
           console.log(response);
           if (response.status === 201) {
@@ -104,7 +83,7 @@ angular.module('kyronApp')
               'Añadió la formación con éxito',
               'success'
             );
-
+            get_experiencia_laboral();
           } else {
             swal(
               'Ha ocurrido un error',
@@ -113,8 +92,9 @@ angular.module('kyronApp')
             );
           }
           self.limpiar_seleccion();
-          get_formacion_academica();
+         
         });
+         
     };
 
   });

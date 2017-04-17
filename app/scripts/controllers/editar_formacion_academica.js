@@ -2,24 +2,25 @@
 
 /**
  * @ngdoc function
- * @name kyronApp.controller:CrearFormacionAcademicaCtrl
+ * @name kyronApp.controller:EditarFormacionAcademicaCtrl
  * @description
- * # CrearFormacionAcademicaCtrl
+ * # EditarFormacionAcademicaCtrl
  * Controller of the kyronApp
  */
 angular.module('kyronApp')
-  .controller('CrearFormacionAcademicaCtrl', function (formacionAcademicaServices, $rootScope) {
+  .controller('EditarFormacionAcademicaCtrl', function (formacionAcademicaServices, $rootScope, $scope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-    $rootScope.id = 123;
+
+
 
     var self = this;
     self.id = $rootScope.id;
     self.vista_previa = false;
-    self.formacion_academica = {};
+    self.formacion_actual = null;
     self.gridOptions = {
       enableFiltering: true,
       enableSorting: true,
@@ -59,6 +60,7 @@ angular.module('kyronApp')
       });
     };
 
+
     var get_institucion = function () {
       formacionAcademicaServices.get('institucion', 'limit=0').then(function (response) {
         self.institucion = response.data;
@@ -81,40 +83,81 @@ angular.module('kyronApp')
     get_programa();
     get_titulo();
 
+
     self.gridOptions.onRegisterApi = function (gridApi) {
       self.gridApi = gridApi;
+      gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+        self.formacion_actual = row.entity;
+        if (self.formacion_actual !== null) {
+          self.vista_previa = true;
+        }
+      });
     };
 
     self.limpiar_seleccion = function () {
-      self.vista_previa = !self.vista_previa;
-      self.formacion_academica = {};
+      self.vista_previa = null;
     };
 
+
     self.guardar = function () {
-      self.formacion_academica.PersonaId = self.id;
-      self.formacion_academica.FechaDato = new Date();
-      self.formacion_academica.Validacion = false;
-      self.formacion_academica.Vigente = true;
-      formacionAcademicaServices.post('formacion_academica', self.formacion_academica)
+      if(self.formacion_actual.Validacion == false){
+      self.formacion_actual.FechaDato = new Date();
+      formacionAcademicaServices.put('formacion_academica', self.formacion_actual.Id, self.formacion_actual)
         .then(function (response) {
-          console.log(response);
-          if (response.status === 201) {
+          if (response.data === 'OK') {
+            get_formacion_academica();
             swal(
               'Buen trabajo!',
-              'Añadió la formación con éxito',
+              'Se editó correctamente!',
               'success'
             );
-
-          } else {
-            swal(
-              'Ha ocurrido un error',
-              response.data,
-              'error'
-            );
+            self.limpiar_seleccion();
           }
+      });}
+      else{
+            swal(
+              'No se ha podido editar!',
+                'La información ya ha sido validada',
+                'error'
+            );
           self.limpiar_seleccion();
-          get_formacion_academica();
-        });
+      }
+    };
+    self.eliminar = function () {
+
+      swal({
+        title: 'Está seguro?',
+        text: "No podrá revertir esto!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Eliminar'
+      }).then(function () {
+       self.formacion_actual.FechaDato = new Date();
+       self.formacion_actual.Vigente = false; 
+       formacionAcademicaServices.put('formacion_academica', self.formacion_actual.Id, self.formacion_actual)
+          .then(function (response) {
+
+            if (response.data === 'OK') {
+              get_formacion_academica();
+              self.limpiar_seleccion();
+              swal(
+                'Eliminado!',
+                'El registro ha sido eliminado.',
+                'success'
+              );
+            } else {
+              swal(
+                'No ha podido ser eliminado!',
+                response.data,
+                'error'
+              );
+            }
+          });
+
+      }).catch(swal.noop);
     };
 
   });
