@@ -4,16 +4,19 @@
             Crear Producción Académica
         </div>
         <div class="panel-body">
+              <form ng-submit="crearProduccionAcademica.guardar()">
             <div class="thumbnail">
                 <br>
                 <img src="images/person-flat.png" alt="..." width="150px">
+               
                 <div class="caption">
+                
                     <md-content class="md-padding" layout-wrap>
 
-
+                     
 
                         <label>Título de Producción</label>
-                        <input type="text" ng-model="tituloProduccion" class="form-control">
+                        <input type="text" ng-model="tituloProduccion" class="form-control" ng-required="true">
 
 
 
@@ -24,18 +27,18 @@
 
 
                         <label>Pais</label>
-                        <input type="text" ng-model="pais"  class="form-control">
+                        <input type="text" ng-model="pais"  class="form-control" ng-required="true">
 
 
 
                         <label>Ciudad</label>
-                        <input type="text" ng-model="ciudad"  class="form-control">
+                        <input type="text" ng-model="ciudad"  class="form-control" ng-required="true">
 
 
 
 
                         <label>Número de Autores</label>
-                        <input type="number" min="1" ng-model="numeroAutores"  class="form-control">
+                        <input type="number" min="1" ng-model="numeroAutores"  class="form-control" ng-required="true">
 
 
 
@@ -54,7 +57,7 @@
                         <div ng-repeat="input in infoInput track by input.Id">
                           <label>{{input.DatoId.Nombre}}</label>
 
-                          <input type="{{input.Dominio.Tipo}}" ng-model="input.Dominio.Valor"  class="form-control">
+                          <input type="{{input.Dominio.Tipo}}" ng-model="input.Dominio.Valor"  class="form-control" ng-required="true">
 
                         </div>
 
@@ -69,9 +72,11 @@
                 </div>
             </div>
             <div class="row" align="center" ng-show="crearProduccionAcademica.vista_previa">
-                <button class="btn btn-outline btn-success btn-md" ng-click="crearProduccionAcademica.guardar()">Nuevo </button>
+                <input type="submit" class="btn btn-outline btn-success btn-md" value="Submit">
                 <button class="btn btn-outline btn-primary btn-md" ng-click="crearProduccionAcademica.limpiar_seleccion()">Cancelar </button>
             </div>
+
+            </form>
         </div>
     </div>
 </div>

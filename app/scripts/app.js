@@ -91,6 +91,16 @@ angular
         controller: 'CrearProduccionAcademicaCtrl',
         controllerAs: 'crearProduccionAcademica'
       })
+      .when('/editar_produccion_academica', {
+        templateUrl: 'views/editar_produccion_academica.html',
+        controller: 'EditarProduccionAcademicaCtrl',
+        controllerAs: 'editarProduccionAcademica'
+      })
+      .when('/consultar_produccion_academica', {
+        templateUrl: 'views/consultar_produccion_academica.html',
+        controller: 'ConsultarProduccionAcademicaCtrl',
+        controllerAs: 'consultarProduccionAcademica'
+      })
       .otherwise({
         redirectTo: '/'
       });

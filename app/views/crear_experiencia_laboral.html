@@ -4,6 +4,7 @@
         Crear Experiencia Laboral
         </div>
         <div class="panel-body">
+             <form ng-submit="crearExperienciaLaboral.guardar()">
             <div class="thumbnail">
                 <br>
                 <img src="images/person-flat.png" alt="..." width="150px">
@@ -18,17 +19,17 @@
                   
                             <label>Fecha de inicio</label>
 
-                            <input ng-model="crearExperienciaLaboral.experiencia_laboral.FechaInicio" type="date" class="form-control">
+                            <input ng-model="crearExperienciaLaboral.experiencia_laboral.FechaInicio" type="date" class="form-control" ng-required="true">
 
                     
                             <label>Fecha de Finalización</label>
 
-                            <input ng-model="crearExperienciaLaboral.experiencia_laboral.FechaFinalizacion" type="date" class="form-control">
+                            <input ng-model="crearExperienciaLaboral.experiencia_laboral.FechaFinalizacion" type="date" class="form-control" ng-required="true">
 
                    
                             <label>Cargo</label>
 
-                            <input ng-model="crearExperienciaLaboral.experiencia_laboral.Cargo" type="text" class="form-control">
+                            <input ng-model="crearExperienciaLaboral.experiencia_laboral.Cargo" type="text" class="form-control" ng-required="true">
 
 
                     </md-content>
@@ -37,9 +38,10 @@
                 </div>
             </div>
             <div class="row" align="center" ng-show="crearExperienciaLaboral.vista_previa">
-                <button class="btn btn-outline btn-success btn-md" ng-click="crearExperienciaLaboral.guardar()">Nuevo </button>
+                <input type="submit" class="btn btn-outline btn-success btn-md" value="Nuevo">
                 <button class="btn btn-outline btn-primary btn-md" ng-click="crearExperienciaLaboral.limpiar_seleccion()">Cancelar </button>
             </div>
+             </form>
         </div>
     </div>
 </div>

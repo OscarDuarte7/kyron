@@ -1,14 +1,15 @@
 <div class="col-md-4" ng-show="crearFormacionAcademica.vista_previa">
     <div class="panel panel-default">
         <div class="panel-heading">
-        Crear Formación Académica
+            Crear Formación Académica
         </div>
         <div class="panel-body">
-            <div class="thumbnail">
-                <br>
-                <img src="images/person-flat.png" alt="..." width="150px">
-                <div class="caption">
-                    <md-content class="md-padding" layout-wrap>
+            <form ng-submit="crearFormacionAcademica.guardar()">
+                <div class="thumbnail">
+                    <br>
+                    <img src="images/person-flat.png" alt="..." width="150px">
+                    <div class="caption">
+                        <md-content class="md-padding" layout-wrap>
 
                             <label>Institución o Entidad</label>
                             <select ng-model="crearFormacionAcademica.formacion_academica.InstitucionId.Id" class="form-control">
@@ -22,9 +23,9 @@
                                 <option ng-repeat="iPrograma in crearFormacionAcademica.programa | filter: {'InstitucionId':{'Id':crearFormacionAcademica.formacion_academica.InstitucionId.Id}}"
                                     ng-value="iPrograma.Id">{{iPrograma.NombrePrograma}} </option>
                             </select>
-            
 
-                 
+
+
                             <label>Título</label>
                             <select ng-model="crearFormacionAcademica.formacion_academica.Titulo.Id" class="form-control">
                                 <option ng-repeat="iTitulo in crearFormacionAcademica.titulo | filter: {'Programa':{'Id':crearFormacionAcademica.formacion_academica.ProgramaId.Id}}"
@@ -36,7 +37,7 @@
                   
                             <label>Fecha de inicio</label>
 
-                            <input ng-model="crearFormacionAcademica.formacion_academica.FechaInicio" type="date" class="form-control">
+                            <input ng-model="crearFormacionAcademica.formacion_academica.FechaInicio" type="date" class="form-control" ng-required="true">
 
               
 
@@ -44,7 +45,7 @@
                     
                             <label>Fecha de Finalización</label>
 
-                            <input ng-model="crearFormacionAcademica.formacion_academica.FechaFinalizacion" type="date" class="form-control">
+                            <input ng-model="crearFormacionAcademica.formacion_academica.FechaFinalizacion" type="date" class="form-control" ng-required="true">
 
   
 
@@ -52,11 +53,11 @@
                    
                             <label>Nombre Proyecto</label>
 
-                            <input ng-model="crearFormacionAcademica.formacion_academica.NombreProyecto" type="text" class="form-control">
+                            <input ng-model="crearFormacionAcademica.formacion_academica.NombreProyecto" type="text" class="form-control" ng-required="true">
 
                              <label>Área Conocimiento</label>
 
-                            <input ng-model="crearFormacionAcademica.formacion_academica.AreaConocimiento" type="text" class="form-control">
+                            <input ng-model="crearFormacionAcademica.formacion_academica.AreaConocimiento" type="text" class="form-control" ng-required="true">
 
                     </md-content>
 
@@ -64,9 +65,10 @@
                 </div>
             </div>
             <div class="row" align="center" ng-show="crearFormacionAcademica.vista_previa">
-                <button class="btn btn-outline btn-success btn-md" ng-click="crearFormacionAcademica.guardar()">Nuevo </button>
+                <input type="submit" class="btn btn-outline btn-success btn-md" value="Nuevo">
                 <button class="btn btn-outline btn-primary btn-md" ng-click="crearFormacionAcademica.limpiar_seleccion()">Cancelar </button>
             </div>
+            </form>
         </div>
     </div>
 </div>
