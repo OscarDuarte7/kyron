@@ -11,9 +11,11 @@ describe('Filter: filtroDatoProduccion', function () {
     filtroDatoProduccion = $filter('filtroDatoProduccion');
   }));
 
-  it('should return the input prefixed with "filtroDatoProduccion filter:"', function () {
-    var text = 'angularjs';
-    expect(filtroDatoProduccion(text)).toBe('filtroDatoProduccion filter: ' + text);
+  it('Debe Retornar el nombre de la opción del dato si dentro del JSON hay una constante con valor select o el dato si el valor es input', function () {
+    var scope = {row:{entity:{DatoSubtipoId:{Algo:'input'}}}};
+    var value = 1;
+    var salida = 1;
+    expect(filtroDatoProduccion(value,scope)).toBe(salida);
   });
 
 });
