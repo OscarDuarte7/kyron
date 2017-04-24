@@ -101,6 +101,21 @@ angular
         controller: 'ConsultarProduccionAcademicaCtrl',
         controllerAs: 'consultarProduccionAcademica'
       })
+      .when('/crear_distincion', {
+        templateUrl: 'views/crear_distincion.html',
+        controller: 'CrearDistincionCtrl',
+        controllerAs: 'crearDistincion'
+      })
+      .when('/editar_distincion', {
+        templateUrl: 'views/editar_distincion.html',
+        controller: 'EditarDistincionCtrl',
+        controllerAs: 'editarDistincion'
+      })
+      .when('/consultar_distincion', {
+        templateUrl: 'views/consultar_distincion.html',
+        controller: 'ConsultarDistincionCtrl',
+        controllerAs: 'consultarDistincion'
+      })
       .otherwise({
         redirectTo: '/'
       });

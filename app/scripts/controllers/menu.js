@@ -62,6 +62,46 @@ angular.module('kyronApp')
         }]
       }, {
         "Id": 1,
+        "Nombre": "Experiencia Docente",
+        "Url": "",
+        "Opciones": [{
+          "Id": 1,
+          "Nombre": " Crear Experiencia Docente",
+          "Url": "crear_experiencia_docente",
+          "Opciones": null
+        }, {
+          "Id": 2,
+          "Nombre": " Editar Experiencia Docente",
+          "Url": "editar_experiencia_docente",
+          "Opciones": null
+        }, {
+          "Id": 3,
+          "Nombre": " Consultar Experiencia Docente",
+          "Url": "consultar_experiencia_docente",
+          "Opciones": null
+        }]
+      },{
+        "Id": 1,
+        "Nombre": "Distinciones",
+        "Url": "",
+        "Opciones": [{
+          "Id": 1,
+          "Nombre": " Crear Distincion",
+          "Url": "crear_distincion",
+          "Opciones": null
+        }, {
+          "Id": 2,
+          "Nombre": " Editar Distincion",
+          "Url": "editar_distincion",
+          "Opciones": null
+        }, {
+          "Id": 3,
+          "Nombre": " Consultar Distinciones",
+          "Url": "consultar_distincion",
+          "Opciones": null
+        }]
+      },{
+        "Id": 1,
         "Nombre": "Formación Académica",
         "Url": "",
         "Opciones": [{

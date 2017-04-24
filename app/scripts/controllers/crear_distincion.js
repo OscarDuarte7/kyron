@@ -2,23 +2,22 @@
 
 /**
  * @ngdoc function
- * @name kyronApp.controller:CrearExperienciaLaboralCtrl
+ * @name kyronApp.controller:CrearDistincionCtrl
  * @description
- * # CrearExperienciaLaboralCtrl
+ * # CrearDistincionCtrl
  * Controller of the kyronApp
  */
 angular.module('kyronApp')
-  .controller('CrearExperienciaLaboralCtrl', function (experienciaLaboralServices, $rootScope) {
+  .controller('CrearDistincionCtrl', function (distincionServices, $rootScope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-
-    var self = this;
+ var self = this;
     self.id = $rootScope.id;
     self.vista_previa = false;
-    self.experiencia_laboral = {};
+    self.distincion = {};
     self.gridOptions = {
       enableFiltering: true,
       enableSorting: true,
@@ -28,19 +27,16 @@ angular.module('kyronApp')
         field: 'InstitucionId.NombreInstitucion', displayName: 'Institución', width: 400
       },
       {
-        field: 'Cargo', displayName: 'Cargo', width: 200
+        field: 'Nombre', displayName: 'Nombre', width: 200
       },
       {
-        field: 'FechaInicio', displayName: 'Fecha Inicio', cellFilter: 'date:"yyyy-MM-dd"', width: 100
-      },
-      {
-        field: 'FechaFinalizacion', displayName: 'Fecha Finalización', cellFilter: 'date:"yyyy-MM-dd"', width: 100
+        field: 'Fecha', displayName: 'Fecha', cellFilter: 'date:"yyyy-MM-dd"', width: 100
       },
       ]
     };
     self.gridOptions.multiSelect = false;
-    var get_experiencia_laboral = function () {
-      experienciaLaboralServices.get('experiencia_laboral', $.param({
+    var get_distincion = function () {
+      distincionServices.get('distincion', $.param({
         query: "PersonaId:" + self.id + ",Vigente:" + true,
         limit: 0
       })).then(function (response) {
@@ -50,13 +46,13 @@ angular.module('kyronApp')
     };
 
     var get_institucion = function () {
-      experienciaLaboralServices.get('institucion', 'limit=0').then(function (response) {
+      distincionServices.get('institucion', 'limit=0').then(function (response) {
         self.institucion = response.data;
       });
     };
 
 
-    get_experiencia_laboral();
+    get_distincion();
     get_institucion();
 
 
@@ -66,15 +62,15 @@ angular.module('kyronApp')
 
     self.limpiar_seleccion = function () {
       self.vista_previa = !self.vista_previa;
-      self.experiencia_laboral = {};
+      self.distincion = {};
     };
 
     self.guardar = function () {
-      self.experiencia_laboral.PersonaId = self.id;
-      self.experiencia_laboral.FechaDato = new Date();
-      self.experiencia_laboral.Validacion = false;
-      self.experiencia_laboral.Vigente = true;
-      experienciaLaboralServices.post('experiencia_laboral', self.experiencia_laboral)
+      self.distincion.PersonaId = self.id;
+      self.distincion.FechaDato = new Date();
+      self.distincion.Validacion = false;
+      self.distincion.Vigente = true;
+      distincionServices.post('distincion', self.distincion)
         .then(function (response) {
           console.log(response);
           if (response.status === 201) {
@@ -83,7 +79,7 @@ angular.module('kyronApp')
               'Añadió la formación con éxito',
               'success'
             );
-            get_experiencia_laboral();
+            get_distincion();
           } else {
             swal(
               'Ha ocurrido un error',
