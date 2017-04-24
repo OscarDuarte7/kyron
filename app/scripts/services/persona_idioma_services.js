@@ -2,17 +2,17 @@
 
 /**
  * @ngdoc service
- * @name kyronApp.idiomasServices
+ * @name kyronApp.personaIdiomaServices
  * @description
- * # idiomasServices
+ * # personaIdiomaServices
  * Factory in the kyronApp.
  */
 angular.module('kyronApp')
-  .factory('idiomasServices', function ($http) {
+  .factory('personaIdiomaServices', function ($http) {
     // Service logic
     // ...
 
-    var path = "http://localhost:8080/v1/";
+    var path = "http://localhost:8084/v1/";
 
     // Public API here
     return {

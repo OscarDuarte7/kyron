@@ -120,6 +120,26 @@ angular.module('kyronApp')
           "Url": "consultar_formacion_academica",
           "Opciones": null
         }]
+      }, {
+        "Id": 1,
+        "Nombre": "Idioma",
+        "Url": "",
+        "Opciones": [{
+          "Id": 1,
+          "Nombre": " Crear Idioma",
+          "Url": "crear_persona_idioma",
+          "Opciones": null
+        }, {
+          "Id": 2,
+          "Nombre": " Editar Idioma",
+          "Url": "editar_persona_idioma",
+          "Opciones": null
+        }, {
+          "Id": 3,
+          "Nombre": " Consultar Idioma",
+          "Url": "consultar_persona_idioma",
+          "Opciones": null
+        }]
       }, { //aqui va el servicio de el app de configuracion
         "Id": 2,
         "Nombre": "nivel 1",

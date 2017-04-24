@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name kyronApp.controller:CrearIdiomasCtrl
+ * @name kyronApp.controller:EditarPersonaIdiomaCtrl
  * @description
- * # CrearIdiomasCtrl
+ * # EditarPersonaIdiomaCtrl
  * Controller of the kyronApp
  */
 angular.module('kyronApp')
-  .controller('CrearIdiomasCtrl', function () {
+  .controller('EditarPersonaIdiomaCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

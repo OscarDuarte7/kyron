@@ -116,6 +116,21 @@ angular
         controller: 'ConsultarDistincionCtrl',
         controllerAs: 'consultarDistincion'
       })
+      .when('/crear_persona_idioma', {
+        templateUrl: 'views/crear_persona_idioma.html',
+        controller: 'CrearPersonaIdiomaCtrl',
+        controllerAs: 'crearPersonaIdioma'
+      })
+      .when('/consultar_persona_idioma', {
+        templateUrl: 'views/consultar_persona_idioma.html',
+        controller: 'ConsultarPersonaIdiomaCtrl',
+        controllerAs: 'consultarPersonaIdioma'
+      })
+      .when('/editar_persona_idioma', {
+        templateUrl: 'views/editar_persona_idioma.html',
+        controller: 'EditarPersonaIdiomaCtrl',
+        controllerAs: 'editarPersonaIdioma'
+      })
       .otherwise({
         redirectTo: '/'
       });
