@@ -131,6 +131,11 @@ angular
         controller: 'EditarPersonaIdiomaCtrl',
         controllerAs: 'editarPersonaIdioma'
       })
+      .when('/validar_produccion_academica', {
+        templateUrl: 'views/validar_produccion_academica.html',
+        controller: 'ValidarProduccionAcademicaCtrl',
+        controllerAs: 'validarProduccionAcademica'
+      })
       .otherwise({
         redirectTo: '/'
       });

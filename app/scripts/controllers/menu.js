@@ -38,6 +38,11 @@ angular.module('kyronApp')
           "Nombre": " Consultar Producción Académica",
           "Url": "consultar_produccion_academica",
           "Opciones": null
+        },  {
+          "Id": 4,
+          "Nombre": " Validar Producción Académica",
+          "Url": "validar_produccion_academica",
+          "Opciones": null
         }]
       }
       , {

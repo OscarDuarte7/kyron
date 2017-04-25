@@ -2,28 +2,30 @@
 
 /**
  * @ngdoc function
- * @name kyronApp.controller:EditarProduccionAcademicaCtrl
+ * @name kyronApp.controller:ValidarProduccionAcademicaCtrl
  * @description
- * # EditarProduccionAcademicaCtrl
+ * # ValidarProduccionAcademicaCtrl
  * Controller of the kyronApp
  */
 angular.module('kyronApp')
-  .controller('EditarProduccionAcademicaCtrl', function (produccionAcademicaServices, $rootScope, $scope,$timeout, uiGridConstants) {
+  .controller('ValidarProduccionAcademicaCtrl', function (produccionAcademicaServices, $rootScope, $scope, $timeout, uiGridConstants) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
 
-        var self = this;
+
+    var self = this;
     self.id = $rootScope.id;
     self.vista_previa = false;
     self.tr_produccion_academica = {};
     self.gridOptions = {
       enableFiltering: true,
       enableSorting: true,
-      enableRowSelection: true,
+      enableRowSelection: false,
       enableRowHeaderSelection: false,
+      rowHeight:30,
       columnDefs: [
         {
           field: 'TituloProduccion', displayName: 'Titulo Producción', width: 200
@@ -40,10 +42,17 @@ angular.module('kyronApp')
         {
           field: 'SubtipoProduccionId.Nombre', displayName: 'Subtipo Producción', width: 300
         },
+        {
+          name: 'Acción',
+           width: 65,
+          cellEditableCondition: false,
+          cellTemplate: '  <div ng-if="row.entity.Validacion == false"> <button class="btn btn-success btn-sm" ng-click="grid.appScope.validarProduccionAcademica.validar(row.entity.Id, row.entity)"> <span class="glyphicon glyphicon-ok-sign"></span>Validar</button> </div>',
+        },
 
       ]
     };
     self.gridOptions.multiSelect = false;
+
     var get_produccion_academica = function () {
       produccionAcademicaServices.get('produccion_academica', $.param({
         query: "PersonaId:" + self.id + ",Vigente:" + true,
@@ -51,24 +60,6 @@ angular.module('kyronApp')
       })).then(function (response) {
         self.gridOptions.data = response.data;
         console.log(self.gridOptions.data);
-      });
-    };
-
-    var get_tipo_produccion = function () {
-      produccionAcademicaServices.get('tipo_produccion', 'limit=0').then(function (response) {
-        self.tipo_produccion = response.data;
-      });
-    };
-
-    var get_subtipo_produccion = function () {
-      produccionAcademicaServices.get('subtipo_produccion', 'limit=0').then(function (response) {
-        self.subtipo_produccion = response.data;
-      });
-    };
-
-    var get_opcion_dato = function () {
-      produccionAcademicaServices.get('opcion_dato', 'limit=0').then(function (response) {
-        self.opcion_dato = response.data;
       });
     };
 
@@ -83,26 +74,15 @@ angular.module('kyronApp')
 
 
     get_produccion_academica();
-    get_tipo_produccion();
-    get_subtipo_produccion();
-    get_opcion_dato();
+
     get_dato_produccion();
 
 
     self.gridOptions.onRegisterApi = function (gridApi) {
       self.gridApi = gridApi;
-        gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-        self.produccion_actual = row.entity;
-        if (self.experiencia_actual !== null) {
-          self.vista_previa = true;
-        }
-      });
     };
 
-    self.limpiar_seleccion = function () {
-      self.vista_previa = !self.vista_previa;
-      self.tr_produccion_academica = {};
-    };
+
 
 
     self.gridOptionsDatoSubtipo = {};
@@ -113,7 +93,7 @@ angular.module('kyronApp')
       // pre-populated search field
       { field: 'DatoSubtipoId.DatoId.Nombre', displayName: 'Dato', width: 300 },
       // no filter input
-      { field: 'Valor', headerCellClass: $scope.highlightFilteredHeader,cellFilter: 'filtroDatoProduccion:this' , width: 300 }
+      { field: 'Valor', headerCellClass: $scope.highlightFilteredHeader, cellFilter: 'filtroDatoProduccion:this', width: 300 }
     ];
     self.gridOptionsDatoSubtipo.onRegisterApi = function (gridApi) {
       $timeout(function () {
@@ -123,45 +103,8 @@ angular.module('kyronApp')
       });
     };
 
-
-   self.guardar = function () {
-      if(self.produccion_actual.Validacion == false){
-      self.produccion_actual.FechaDato = new Date();
-      produccionAcademicaServices.put('produccion_academica', self.produccion_actual.Id, self.produccion_actual)
-        .then(function (response) {
-          if (response.data === 'OK') {
-           
-            swal(
-              'Buen trabajo!',
-              'Se editó correctamente!',
-              'success'
-            );
-            
-          } else {
-              swal(
-                'No se ha podido editar!',
-                response.data,
-                'error'
-              );
-            }
-            self.limpiar_seleccion();
-      });}
-      else{
-            swal(
-              'No se ha podido editar!',
-                'La información ya ha sido validada',
-                'error'
-            );
-          self.limpiar_seleccion();
-      }
-
-       get_produccion_academica();
-    };
-
-
-        self.eliminar = function () {
-
-      swal({
+    self.validar = function(id, produccion_academica){
+        swal({
         title: 'Está seguro?',
         text: "No podrá revertir esto!",
         type: 'warning',
@@ -169,32 +112,29 @@ angular.module('kyronApp')
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         cancelButtonText: 'Cancelar',
-        confirmButtonText: 'Eliminar'
+        confirmButtonText: 'Validar'
       }).then(function () {
-       self.produccion_actual.FechaDato = new Date();
-       self.produccion_actual.Vigente = false; 
-       produccionAcademicaServices.put('produccion_academica', self.produccion_actual.Id, self.produccion_actual)
-          .then(function (response) {
-
-            if (response.data === 'OK') {
-              get_produccion_academica();
-              get_dato_produccion();
-              self.limpiar_seleccion();
+        produccion_academica.Validacion = true;
+    produccionAcademicaServices.put('produccion_academica', id, produccion_academica).then(function(response){
+        if (response.data === 'OK') {
+           
+            swal(
+              'Buen trabajo!',
+              'Se validó correctamente!',
+              'success'
+            );
+             get_produccion_academica();
+            
+          } else {
               swal(
-                'Eliminado!',
-                'El registro ha sido eliminado.',
-                'success'
-              );
-            } else {
-              swal(
-                'No ha podido ser eliminado!',
+                'No se ha podido validar!',
                 response.data,
                 'error'
               );
             }
-          });
 
-      }).catch(swal.noop);
-    };
 
+    });
+      });
+  }
   });
