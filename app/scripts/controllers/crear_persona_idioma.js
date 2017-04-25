@@ -20,7 +20,7 @@ angular.module('kyronApp')
     var self = this;
     self.id = $rootScope.id;
     self.vista_previa = false;
-    self.formacion_academica = {};
+    self.persona_idioma = {};
     self.gridOptions = {
       enableFiltering: true,
       enableSorting: true,
@@ -80,7 +80,7 @@ angular.module('kyronApp')
           if (response.status === 201) {
             swal(
               'Buen trabajo!',
-              'Añadió la formación con éxito',
+              'Añadió la idioma con éxito',
               'success'
             );
 

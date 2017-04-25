@@ -27,17 +27,17 @@ angular.module('kyronApp')
       enableRowHeaderSelection: false,
       columnDefs: [
       {
-        field: 'IdiomaId.Nombre', displayName: 'Idioma', width: 200
+        field: 'Idioma.Nombre', displayName: 'Idioma', width: 200
       },
       {
-        field: 'NivelIdioma.NombreNivel', displayName: 'NivelIdioma', width: 300
+        field: 'NivelIdioma.NombreNivel', displayName: 'Nivel', width: 300
       },
       ]
     };
     self.gridOptions.multiSelect = false;
     var get_persona_idioma = function () {
       personaIdiomaServices.get('persona_idioma', $.param({
-        query: "Vigente:" + true,
+        query:"Vigente:" + true,
         limit: 0
       })).then(function (response) {
         self.gridOptions.data = response.data;

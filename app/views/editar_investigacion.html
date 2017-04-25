@@ -10,7 +10,7 @@
                 <div class="caption">
 
 
-                    <div class="alert alert-warning"  ng-show="editarInvestigacion.formacion_actual.Validacion">
+                    <div class="alert alert-warning"  ng-show="editarInvestigacion.investigacion_actual.Validacion">
                         <strong>Alerta</strong> El registro ya ha sido validado y no puede ser modificado.
                     </div>
 
@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="row" align="center" ng-show="editarInvestigacion.vista_previa">
-        <button class="btn btn-outline btn-success btn-md" ng-show="!editarInvestigacion.formacion_actual.Validacion" ng-click="editarInvestigacion.guardar()">{{ 'GUARDAR' | translate }} </button>
+        <button class="btn btn-outline btn-success btn-md" ng-show="!editarInvestigacion.investigacion_actual.Validacion" ng-click="editarInvestigacion.guardar()">{{ 'GUARDAR' | translate }} </button>
         <button class="btn btn-outline btn-danger btn-md" ng-click="editarInvestigacion.eliminar()">{{ 'ELIMINAR' | translate }} </button>
         <button class="btn btn-outline btn-primary btn-md" ng-click="editarInvestigacion.limpiar_seleccion()">{{ 'CANCELAR' | translate }} </button>
       </div>
