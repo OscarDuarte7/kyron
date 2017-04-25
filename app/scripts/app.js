@@ -136,6 +136,21 @@ angular
         controller: 'ValidarProduccionAcademicaCtrl',
         controllerAs: 'validarProduccionAcademica'
       })
+      .when('/consultar_investigacion', {
+        templateUrl: 'views/consultar_investigacion.html',
+        controller: 'ConsultarInvestigacionCtrl',
+        controllerAs: 'consultarInvestigacion'
+      })
+      .when('/editar_investigacion', {
+        templateUrl: 'views/editar_investigacion.html',
+        controller: 'EditarInvestigacionCtrl',
+        controllerAs: 'editarInvestigacion'
+      })
+      .when('/crear_investigacion', {
+        templateUrl: 'views/crear_investigacion.html',
+        controller: 'CrearInvestigacionCtrl',
+        controllerAs: 'crearInvestigacion'
+      })
       .otherwise({
         redirectTo: '/'
       });
