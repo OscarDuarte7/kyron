@@ -151,6 +151,21 @@ angular
         controller: 'CrearInvestigacionCtrl',
         controllerAs: 'crearInvestigacion'
       })
+      .when('/crear_experiencia_docente', {
+        templateUrl: 'views/crear_experiencia_docente.html',
+        controller: 'CrearExperienciaDocenteCtrl',
+        controllerAs: 'crearExperienciaDocente'
+      })
+      .when('/editar_experiencia_docente', {
+        templateUrl: 'views/editar_experiencia_docente.html',
+        controller: 'EditarExperienciaDocenteCtrl',
+        controllerAs: 'editarExperienciaDocente'
+      })
+      .when('/consultar_experiencia_docente', {
+        templateUrl: 'views/consultar_experiencia_docente.html',
+        controller: 'ConsultarExperienciaDocenteCtrl',
+        controllerAs: 'consultarExperienciaDocente'
+      })
       .otherwise({
         redirectTo: '/'
       });

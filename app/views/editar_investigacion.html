@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="row" align="center" ng-show="editarInvestigacion.vista_previa">
-        <button class="btn btn-outline btn-success btn-md" ng-show="!editarInvestigacion.investigacion_actual.Validacion" ng-click="editarInvestigacion.guardar()">{{ 'GUARDAR' | translate }} </button>
+        <!--<button class="btn btn-outline btn-success btn-md" ng-show="!editarInvestigacion.investigacion_actual.Validacion" ng-click="editarInvestigacion.guardar()">{{ 'GUARDAR' | translate }} </button>-->
         <button class="btn btn-outline btn-danger btn-md" ng-click="editarInvestigacion.eliminar()">{{ 'ELIMINAR' | translate }} </button>
         <button class="btn btn-outline btn-primary btn-md" ng-click="editarInvestigacion.limpiar_seleccion()">{{ 'CANCELAR' | translate }} </button>
       </div>
@@ -57,7 +57,7 @@
 <div ng-class="{'col-md-8': editarInvestigacion.vista_previa , 'col-md-8 col-md-offset-2': !editarInvestigacion.vista_previa}">
   <div class="panel panel-default">
     <div class="panel-heading">
-     Formación Académica
+     Investigacion
     </div>
     <div class="panel-body">
       <div ui-grid="editarInvestigacion.gridOptions" ui-grid-auto-resize ui-grid-selection class="ui_grid"></div>
