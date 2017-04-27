@@ -2,22 +2,25 @@
 
 /**
  * @ngdoc function
- * @name kyronApp.controller:ConsultarDistincionCtrl
+ * @name kyronApp.controller:ConsultarCategoriaPersonaCtrl
  * @description
- * # ConsultarDistincionCtrl
+ * # ConsultarCategoriaPersonaCtrl
  * Controller of the kyronApp
  */
 angular.module('kyronApp')
-  .controller('ConsultarDistincionCtrl', function (distincionServices, $rootScope) {
+  .controller('ConsultarCategoriaPersonaCtrl', function (categoriaServices, $rootScope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
 
+
     var self = this;
     self.id = $rootScope.id;
     self.vista_previa = false;
+    self.categoria_persona = {};
+    self.tipo_categoria = {};
     self.gridOptions = {
       enableFiltering: true,
       enableSorting: true,
@@ -26,21 +29,18 @@ angular.module('kyronApp')
       columnDefs: [{
         field: 'PersonaId', displayName: 'Persona', width: 300
       },{
-        field: 'InstitucionId.NombreInstitucion', displayName: 'Institución', width: 400
+        field: 'IdTipoCategoria.NombreCategoria', displayName: 'Categoria', width: 400
       },
       {
-        field: 'Nombre', displayName: 'Nombre', width: 200
+        field: 'FechaDato', displayName: 'Fecha', cellFilter: 'date:"yyyy-MM-dd"', width: 100
       },
-      {
-        field: 'Fecha', displayName: 'Fecha', cellFilter: 'date:"yyyy-MM-dd"', width: 100
-      },
-
       ]
     };
-    self.gridOptions.multiSelect = false;
-    var get_distincion = function () {
-      distincionServices.get('distincion', $.param({
-        query:"Vigente:" + true,
+
+
+    var get_categoria_persona = function () {
+      categoriaServices.get('categoria_persona', $.param({
+        query: "Vigente:" + true,
         limit: 0
       })).then(function (response) {
         self.gridOptions.data = response.data;
@@ -48,7 +48,9 @@ angular.module('kyronApp')
       });
     };
 
-    get_distincion();
+
+
+    get_categoria_persona();
 
     self.gridOptions.onRegisterApi = function (gridApi) {
       self.gridApi = gridApi;

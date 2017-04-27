@@ -1,23 +1,23 @@
 'use strict';
 
-describe('Controller: PersonaIdiomaCtrl', function () {
+describe('Controller: ValidarCategoriaPersonaCtrl', function () {
 
   // load the controller's module
   beforeEach(module('kyronApp'));
 
-  var PersonaIdiomaCtrl,
+  var ValidarCategoriaPersonaCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    PersonaIdiomaCtrl = $controller('PersonaIdiomaCtrl', {
+    ValidarCategoriaPersonaCtrl = $controller('ValidarCategoriaPersonaCtrl', {
       $scope: scope
       // place here mocked dependencies
     });
   }));
 
   it('should attach a list of awesomeThings to the scope', function () {
-    expect(PersonaIdiomaCtrl.awesomeThings.length).toBe(3);
+    expect(ValidarCategoriaPersonaCtrl.awesomeThings.length).toBe(3);
   });
 });

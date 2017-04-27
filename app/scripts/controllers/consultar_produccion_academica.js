@@ -24,7 +24,9 @@ angular.module('kyronApp')
       enableSorting: true,
       enableRowSelection: true,
       enableRowHeaderSelection: false,
-      columnDefs: [
+      columnDefs: [{
+        field: 'PersonaId', displayName: 'Persona', width: 300
+      },
         {
           field: 'TituloProduccion', displayName: 'Titulo Producción', width: 200
         },
@@ -46,7 +48,7 @@ angular.module('kyronApp')
     self.gridOptions.multiSelect = false;
     var get_produccion_academica = function () {
       produccionAcademicaServices.get('produccion_academica', $.param({
-        query: "PersonaId:" + self.id + ",Vigente:" + true,
+        query: "Vigente:" + true,
         limit: 0
       })).then(function (response) {
         self.gridOptions.data = response.data;

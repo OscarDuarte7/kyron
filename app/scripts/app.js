@@ -181,6 +181,21 @@ angular
         controller: 'CrearCategoriaPersonaCtrl',
         controllerAs: 'crearCategoriaPersona'
       })
+      .when('/editar_categoria_persona', {
+        templateUrl: 'views/editar_categoria_persona.html',
+        controller: 'EditarCategoriaPersonaCtrl',
+        controllerAs: 'editarCategoriaPersona'
+      })
+      .when('/consultar_categoria_persona', {
+        templateUrl: 'views/consultar_categoria_persona.html',
+        controller: 'ConsultarCategoriaPersonaCtrl',
+        controllerAs: 'consultarCategoriaPersona'
+      })
+      .when('/validar_categoria_persona', {
+        templateUrl: 'views/validar_categoria_persona.html',
+        controller: 'ValidarCategoriaPersonaCtrl',
+        controllerAs: 'validarCategoriaPersona'
+      })
       .otherwise({
         redirectTo: '/'
       });

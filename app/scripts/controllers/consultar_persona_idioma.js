@@ -25,7 +25,9 @@ angular.module('kyronApp')
       enableSorting: true,
       enableRowSelection: true,
       enableRowHeaderSelection: false,
-      columnDefs: [
+      columnDefs: [{
+        field: 'PersonaId', displayName: 'Persona', width: 300
+      },
       {
         field: 'Idioma.Nombre', displayName: 'Idioma', width: 200
       },
@@ -54,4 +56,3 @@ angular.module('kyronApp')
     };
 
   });
-  

@@ -195,6 +195,11 @@ angular.module('kyronApp')
           "Nombre": " Consultar Categoria",
           "Url": "consultar_categoria_persona",
           "Opciones": null
+        }, {
+          "Id": 4,
+          "Nombre": " Validar Categoria",
+          "Url": "validar_categoria_persona",
+          "Opciones": null
         }]
       },
       { //aqui va el servicio de el app de configuracion

@@ -2,18 +2,19 @@
 
 /**
  * @ngdoc function
- * @name kyronApp.controller:CrearCategoriaPersonaCtrl
+ * @name kyronApp.controller:ValidarCategoriaPersonaCtrl
  * @description
- * # CrearCategoriaPersonaCtrl
+ * # ValidarCategoriaPersonaCtrl
  * Controller of the kyronApp
  */
 angular.module('kyronApp')
-  .controller('CrearCategoriaPersonaCtrl', function (categoriaServices, $rootScope) {
+  .controller('ValidarCategoriaPersonaCtrl', function (categoriaServices, $rootScope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+
 
     var self = this;
     self.id = $rootScope.id;
@@ -26,10 +27,18 @@ angular.module('kyronApp')
       enableRowSelection: true,
       enableRowHeaderSelection: false,
       columnDefs: [{
+        field: 'PersonaId', displayName: 'Persona', width: 300
+      },{
         field: 'IdTipoCategoria.NombreCategoria', displayName: 'Categoria', width: 400
       },
       {
         field: 'FechaDato', displayName: 'Fecha', cellFilter: 'date:"yyyy-MM-dd"', width: 100
+      },
+      {
+        name: 'Acción',
+        width: 65,
+        cellEditableCondition: false,
+        cellTemplate: '  <div ng-if="row.entity.Validacion == false"> <button class="btn btn-success btn-sm" ng-click="grid.appScope.validarCategoriaPersona.validar(row.entity.Id, row.entity)"> <span class="glyphicon glyphicon-ok-sign"></span>Validar</button> </div>',
       },
       ]
     };
@@ -45,59 +54,48 @@ angular.module('kyronApp')
       });
     };
 
-    var get_tipo_categoria = function () {
-      categoriaServices.get('tipo_categoria', 'limit=0').then(function (response) {
-        self.tipo_categoria = response.data;
-      });
-    };
+
 
     get_categoria_persona();
-    get_tipo_categoria();
 
     self.gridOptions.onRegisterApi = function (gridApi) {
       self.gridApi = gridApi;
     };
 
-    self.limpiar_seleccion = function () {
-      self.vista_previa = !self.vista_previa;
-      self.categoria_persona = {};
-    };
 
-    self.guardar = function () {
-      if(self.gridOptions.data==null){
-        self.categoria_persona.PersonaId = self.id;
-        self.categoria_persona.FechaDato = new Date();
-        self.categoria_persona.Validacion = false;
-        self.categoria_persona.Vigente = true;
-        categoriaServices.post('categoria_persona', self.categoria_persona)
-        .then(function (response) {
-          console.log(response);
-          if (response.status === 201) {
+    self.validar = function (id, categoria_persona) {
+      swal({
+        title: 'Está seguro?',
+        text: "No podrá revertir esto!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Validar'
+      }).then(function () {
+        categoria_persona.Validacion = true;
+        categoriaServices.put('categoria_persona', id, categoria_persona).then(function (response) {
+          if (response.data === 'OK') {
+
             swal(
               'Buen trabajo!',
-              'Añadió la información con éxito',
+              'Se validó correctamente!',
               'success'
             );
             get_categoria_persona();
+
           } else {
             swal(
-              'Ha ocurrido un error',
+              'No se ha podido validar!',
               response.data,
               'error'
             );
           }
-          self.limpiar_seleccion();
+
 
         });
-      }else{
-
-        swal(
-          'Ha ocurrido un error',
-          'La persona '+ self.id +' Tiene una categoria asignada, debe eliminarla antes de agregar una nueva',
-          'error'
-        );
-        self.limpiar_seleccion();
-      }
+      });
     };
 
   });
