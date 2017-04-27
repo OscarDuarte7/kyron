@@ -76,7 +76,7 @@ angular.module('kyronApp')
 
     var get_dato_produccion = function () {
       produccionAcademicaServices.get('dato_produccion', $.param({
-        query: "ProduccionAcademicaId.PersonaId:" + self.id + ",ProduccionAcademicaId.Vigente:" + true,
+        query: "ProduccionAcademicaId.Vigente:" + true,
         limit: 0
       })).then(function (response) {
         self.gridOptionsDatoSubtipo.data = response.data;
