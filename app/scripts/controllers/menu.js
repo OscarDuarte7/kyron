@@ -38,7 +38,7 @@ angular.module('kyronApp')
           "Nombre": " Consultar Producción Académica",
           "Url": "consultar_produccion_academica",
           "Opciones": null
-        },  {
+        }, {
           "Id": 4,
           "Nombre": " Validar Producción Académica",
           "Url": "validar_produccion_academica",
@@ -64,6 +64,11 @@ angular.module('kyronApp')
           "Nombre": " Consultar Experiencia Laboral",
           "Url": "consultar_experiencia_laboral",
           "Opciones": null
+        }, {
+          "Id": 4,
+          "Nombre": " Validar Experiencia Laboral",
+          "Url": "validar_experiencia_laboral",
+          "Opciones": null
         }]
       }, {
         "Id": 1,
@@ -85,7 +90,7 @@ angular.module('kyronApp')
           "Url": "consultar_experiencia_docente",
           "Opciones": null
         }]
-      },{
+      }, {
         "Id": 1,
         "Nombre": "Distinciones",
         "Url": "",
@@ -105,7 +110,7 @@ angular.module('kyronApp')
           "Url": "consultar_distincion",
           "Opciones": null
         }]
-      },{
+      }, {
         "Id": 1,
         "Nombre": "Formación Académica",
         "Url": "",
@@ -124,7 +129,13 @@ angular.module('kyronApp')
           "Nombre": " Consultar Formación Académica",
           "Url": "consultar_formacion_academica",
           "Opciones": null
-        }]
+        }, {
+          "Id": 4,
+          "Nombre": " Validar Formación Académica",
+          "Url": "validar_formacion_academica",
+          "Opciones": null
+        }
+        ]
       }, {
         "Id": 1,
         "Nombre": "Idioma",
@@ -165,7 +176,28 @@ angular.module('kyronApp')
           "Url": "consultar_investigacion",
           "Opciones": null
         }]
-      }, { //aqui va el servicio de el app de configuracion
+      }, {
+        "Id": 1,
+        "Nombre": "Categoria",
+        "Url": "",
+        "Opciones": [{
+          "Id": 1,
+          "Nombre": " Crear Categoria",
+          "Url": "crear_categoria_persona",
+          "Opciones": null
+        }, {
+          "Id": 2,
+          "Nombre": " Editar Categoria",
+          "Url": "editar_categoria_persona",
+          "Opciones": null
+        }, {
+          "Id": 3,
+          "Nombre": " Consultar Categoria",
+          "Url": "consultar_categoria_persona",
+          "Opciones": null
+        }]
+      },
+      { //aqui va el servicio de el app de configuracion
         "Id": 2,
         "Nombre": "nivel 1",
         "Url": "url_nivel_1",

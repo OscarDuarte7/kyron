@@ -166,6 +166,21 @@ angular
         controller: 'ConsultarExperienciaDocenteCtrl',
         controllerAs: 'consultarExperienciaDocente'
       })
+      .when('/validar_experiencia_laboral', {
+        templateUrl: 'views/validar_experiencia_laboral.html',
+        controller: 'ValidarExperienciaLaboralCtrl',
+        controllerAs: 'validarExperienciaLaboral'
+      })
+      .when('/validar_formacion_academica', {
+        templateUrl: 'views/validar_formacion_academica.html',
+        controller: 'ValidarFormacionAcademicaCtrl',
+        controllerAs: 'validarFormacionAcademica'
+      })
+      .when('/crear_categoria_persona', {
+        templateUrl: 'views/crear_categoria_persona.html',
+        controller: 'CrearCategoriaPersonaCtrl',
+        controllerAs: 'crearCategoriaPersona'
+      })
       .otherwise({
         redirectTo: '/'
       });
