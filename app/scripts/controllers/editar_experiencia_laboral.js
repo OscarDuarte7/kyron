@@ -76,18 +76,18 @@ angular.module('kyronApp')
 
 
     self.guardar = function () {
-      if(self.experiencia_actual.Validacion == false){
+      if(self.experiencia_actual.Validacion === false){
       self.experiencia_actual.FechaDato = new Date();
       experienciaLaboralServices.put('experiencia_laboral', self.experiencia_actual.Id, self.experiencia_actual)
         .then(function (response) {
           if (response.data === 'OK') {
-           
+
             swal(
               'Buen trabajo!',
               'Se editó correctamente!',
               'success'
             );
-            
+
           } else {
               swal(
                 'No se ha podido editar!',
@@ -121,7 +121,7 @@ angular.module('kyronApp')
         confirmButtonText: 'Eliminar'
       }).then(function () {
        self.experiencia_actual.FechaDato = new Date();
-       self.experiencia_actual.Vigente = false; 
+       self.experiencia_actual.Vigente = false;
        experienciaLaboralServices.put('experiencia_laboral', self.experiencia_actual.Id, self.experiencia_actual)
           .then(function (response) {
 
@@ -146,5 +146,3 @@ angular.module('kyronApp')
     };
 
   });
-
-

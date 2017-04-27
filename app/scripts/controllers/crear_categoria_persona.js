@@ -64,7 +64,7 @@ angular.module('kyronApp')
     };
 
     self.guardar = function () {
-      if(self.gridOptions.data==null){
+      if(self.gridOptions.data===null){
         self.categoria_persona.PersonaId = self.id;
         self.categoria_persona.FechaDato = new Date();
         self.categoria_persona.Validacion = false;

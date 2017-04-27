@@ -72,7 +72,7 @@ angular.module('kyronApp')
 
 
     self.guardar = function () {
-      if(self.categoria_actual.Validacion == false){
+      if(self.categoria_actual.Validacion === false){
       self.categoria_actual.FechaDato = new Date();
       categoriaServices.put('categoria_persona', self.categoria_actual.Id, self.categoria_actual)
         .then(function (response) {

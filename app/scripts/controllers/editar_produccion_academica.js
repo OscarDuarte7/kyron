@@ -54,6 +54,7 @@ angular.module('kyronApp')
       });
     };
 
+
     var get_tipo_produccion = function () {
       produccionAcademicaServices.get('tipo_produccion', 'limit=0').then(function (response) {
         self.tipo_produccion = response.data;
@@ -125,18 +126,18 @@ angular.module('kyronApp')
 
 
    self.guardar = function () {
-      if(self.produccion_actual.Validacion == false){
+      if(self.produccion_actual.Validacion === false){
       self.produccion_actual.FechaDato = new Date();
       produccionAcademicaServices.put('produccion_academica', self.produccion_actual.Id, self.produccion_actual)
         .then(function (response) {
           if (response.data === 'OK') {
-           
+
             swal(
               'Buen trabajo!',
               'Se editó correctamente!',
               'success'
             );
-            
+
           } else {
               swal(
                 'No se ha podido editar!',
@@ -172,7 +173,7 @@ angular.module('kyronApp')
         confirmButtonText: 'Eliminar'
       }).then(function () {
        self.produccion_actual.FechaDato = new Date();
-       self.produccion_actual.Vigente = false; 
+       self.produccion_actual.Vigente = false;
        produccionAcademicaServices.put('produccion_academica', self.produccion_actual.Id, self.produccion_actual)
           .then(function (response) {
 

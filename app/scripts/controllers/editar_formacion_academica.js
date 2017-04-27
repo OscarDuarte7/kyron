@@ -100,7 +100,7 @@ angular.module('kyronApp')
 
 
     self.guardar = function () {
-      if(self.formacion_actual.Validacion == false){
+      if(self.formacion_actual.Validacion === false){
       self.formacion_actual.FechaDato = new Date();
       formacionAcademicaServices.put('formacion_academica', self.formacion_actual.Id, self.formacion_actual)
         .then(function (response) {
@@ -136,7 +136,7 @@ angular.module('kyronApp')
         confirmButtonText: 'Eliminar'
       }).then(function () {
        self.formacion_actual.FechaDato = new Date();
-       self.formacion_actual.Vigente = false; 
+       self.formacion_actual.Vigente = false;
        formacionAcademicaServices.put('formacion_academica', self.formacion_actual.Id, self.formacion_actual)
           .then(function (response) {
 

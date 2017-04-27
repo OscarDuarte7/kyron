@@ -37,7 +37,7 @@
          } else if (retorno.includes("select")) {
            var indice =0;
            for(var i=0; i < opcion.length; i++){
-             if(opcion[i].Id == value){
+             if(opcion[i].Id === value){
                indice = i;
              }
 

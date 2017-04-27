@@ -72,18 +72,18 @@ angular.module('kyronApp')
 
 
     self.guardar = function () {
-      if(self.distincion_actual.Validacion == false){
+      if(self.distincion_actual.Validacion === false){
       self.distincion_actual.FechaDato = new Date();
       distincionServices.put('distincion', self.distincion_actual.Id, self.distincion_actual)
         .then(function (response) {
           if (response.data === 'OK') {
-           
+
             swal(
               'Buen trabajo!',
               'Se editó correctamente!',
               'success'
             );
-            
+
           } else {
               swal(
                 'No se ha podido editar!',
@@ -117,7 +117,7 @@ angular.module('kyronApp')
         confirmButtonText: 'Eliminar'
       }).then(function () {
        self.distincion_actual.FechaDato = new Date();
-       self.distincion_actual.Vigente = false; 
+       self.distincion_actual.Vigente = false;
        distincionServices.put('distincion', self.distincion_actual.Id, self.distincion_actual)
           .then(function (response) {
 
@@ -142,5 +142,3 @@ angular.module('kyronApp')
     };
 
   });
-
-

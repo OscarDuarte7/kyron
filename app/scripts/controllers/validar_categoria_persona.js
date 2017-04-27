@@ -46,7 +46,7 @@ angular.module('kyronApp')
 
     var get_categoria_persona = function () {
       categoriaServices.get('categoria_persona', $.param({
-        query: "PersonaId:" + self.id + ",Vigente:" + true,
+        query: "Vigente:" + true,
         limit: 0
       })).then(function (response) {
         self.gridOptions.data = response.data;

@@ -163,7 +163,7 @@ angular.module('kyronApp')
              "Validacion": false,
              "FechaDato" : new Date(),
              "Vigente" : true
-           }
+           };
 
 
            var dataDatoProduccion = [];

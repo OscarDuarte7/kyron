@@ -7,7 +7,7 @@
  * Controller of the kyronApp
  */
 angular.module('kyronApp')
-  .controller('menuCtrl', function ($location, $http, $scope, token_service, notificacion, $translate) {
+  .controller('menuCtrl', function ($location, $http, $scope, token_service, notificacion, $translate, $rootScope) {
     var paths = [];
     $scope.language = {
       es: "btn btn-primary btn-circle btn-outline active",
@@ -17,6 +17,17 @@ angular.module('kyronApp')
     $scope.actual = "";
     $scope.token_service = token_service;
     $scope.breadcrumb = [];
+    $scope.menu_service = [];
+
+$scope.cargarMenu = function(){
+    $http.get("http://10.20.2.17/models/"+$rootScope.rol+".json" ).then(function(response){
+      $scope.menu_service = response.data;
+      console.log($scope.menu_service);
+    });
+  };
+
+  $scope.cargarMenu();
+/*
     $scope.menu_service = [
 
       {
@@ -201,6 +212,16 @@ angular.module('kyronApp')
           "Url": "validar_categoria_persona",
           "Opciones": null
         }]
+      }, {
+        "Id": 1,
+        "Nombre": "Puntaje",
+        "Url": "",
+        "Opciones": [{
+          "Id": 1,
+          "Nombre": " Calcular Puntaje",
+          "Url": "calcular_puntaje",
+          "Opciones": null
+        }]
       },
       { //aqui va el servicio de el app de configuracion
         "Id": 2,
@@ -222,7 +243,7 @@ angular.module('kyronApp')
             }]
           }]
         }]
-      }];
+      }];*/
 
     var recorrerArbol = function (item, padre) {
       var padres = "";

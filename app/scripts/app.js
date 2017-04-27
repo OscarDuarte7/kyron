@@ -196,6 +196,11 @@ angular
         controller: 'ValidarCategoriaPersonaCtrl',
         controllerAs: 'validarCategoriaPersona'
       })
+      .when('/calcular_puntaje', {
+        templateUrl: 'views/calcular_puntaje.html',
+        controller: 'CalcularPuntajeCtrl',
+        controllerAs: 'calcularPuntaje'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -203,8 +208,8 @@ angular
 
 angular.module('kyronApp').run(function ($rootScope) {
 
-  $rootScope.id =123;
-
+  $rootScope.id = 0;
+  $rootScope.rol = "";
 
 
 
