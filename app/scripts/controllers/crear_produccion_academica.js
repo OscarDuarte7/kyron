@@ -67,11 +67,11 @@ angular.module('kyronApp')
       });
     };
 
-    var get_opcion_dato = function () {
+  /*  var get_opcion_dato = function () {
       produccionAcademicaServices.get('opcion_dato', 'limit=0').then(function (response) {
         self.opcion_dato = response.data;
       });
-    };
+    };*/
 
     var get_dato_produccion = function () {
       produccionAcademicaServices.get('dato_produccion', $.param({
@@ -86,7 +86,7 @@ angular.module('kyronApp')
     get_produccion_academica();
     get_tipo_produccion();
     get_subtipo_produccion();
-    get_opcion_dato();
+  //  get_opcion_dato();
     get_dato_produccion();
 
 
@@ -147,6 +147,16 @@ angular.module('kyronApp')
 
     };
 
+    $scope.obtenerOpcion = function (idOpcion) {
+      self.paramOpcion = $.param({
+        query: "Dato:" + idOpcion
+      });
+
+      produccionAcademicaServices.get("opcion_dato", self.paramOpcion).then(function (response) {
+        self.opcion_dato = response.data;
+      });
+
+    };
 
 
     self.guardar = function () {

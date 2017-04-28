@@ -63,8 +63,8 @@
 
                         <div ng-repeat="select in infoSelect track by select.Id">
                           <label>{{select.DatoId.Nombre}}</label>
-                          <select ng-model="select.Dominio.Valor"   class="form-control">
-                            <option ng-repeat="opcion in crearProduccionAcademica.opcion_dato  | filter: {'Dato':{'Id':select.DatoId.Id }}" ng-value="opcion.Id" ng-value="opcion.Id">{{opcion.NombreOpcion}} </option>
+                          <select ng-model="select.Dominio.Valor"   class="form-control"  ng-click="obtenerOpcion(select.DatoId.Id)">
+                            <option ng-repeat="opcion in crearProduccionAcademica.opcion_dato" ng-value="opcion.Id">{{opcion.NombreOpcion}} </option>
                           </select>
                         </div>
 
@@ -72,7 +72,7 @@
                 </div>
             </div>
             <div class="row" align="center" ng-show="crearProduccionAcademica.vista_previa">
-                <input type="submit" class="btn btn-outline btn-success btn-md" value="Submit">
+                <input type="submit" class="btn btn-outline btn-success btn-md" value="Guardar">
                 <button class="btn btn-outline btn-primary btn-md" ng-click="crearProduccionAcademica.limpiar_seleccion()">Cancelar </button>
             </div>
 
