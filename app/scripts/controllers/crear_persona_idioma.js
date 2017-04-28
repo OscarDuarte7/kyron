@@ -38,7 +38,7 @@ angular.module('kyronApp')
     self.gridOptions.multiSelect = false;
     var get_persona_idioma = function () {
       personaIdiomaServices.get('persona_idioma', $.param({
-        query:"Vigente:" + true,
+        query:"PersonaId:" + self.id + ",Vigente:" + true,
         limit: 0
       })).then(function (response) {
         self.gridOptions.data = response.data;
@@ -97,4 +97,3 @@ angular.module('kyronApp')
     };
 
   });
-

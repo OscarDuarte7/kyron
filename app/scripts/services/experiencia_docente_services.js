@@ -12,7 +12,7 @@ angular.module('kyronApp')
     // Service logic
     // ...
 
-    var path = "http://10.20.2.17:8080/v1/";
+    var path = "http://10.20.2.17:8083/v1/";
 
     // Public API here
     return {
