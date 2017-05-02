@@ -113,10 +113,12 @@ angular.module('kyronApp')
 
     };
     self.guardar = function () {
+
       self.formacion_academica.PersonaId = self.id;
       self.formacion_academica.FechaDato = new Date();
       self.formacion_academica.Validacion = false;
       self.formacion_academica.Vigente = true;
+      if(self.formacion_academica.FechaInicio < self.formacion_academica.FechaFinalizacion){
       formacionAcademicaServices.post('formacion_academica', self.formacion_academica)
         .then(function (response) {
           console.log(response);
@@ -137,6 +139,15 @@ angular.module('kyronApp')
           self.limpiar_seleccion();
           get_formacion_academica();
         });
+      }
+      else {
+        swal(
+          'Ha ocurrido un error',
+          'La fecha de inicio debe ser menor a la fecha de finalización',
+          'error'
+        );
+      }
+
     };
 
   });

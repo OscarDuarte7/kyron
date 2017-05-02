@@ -8,8 +8,8 @@
  * Decorator of the kyronApp
  */
 var text_es = {
-  TITULO: "GENERATOR-OAS",
-  MENSAJE_INICIAL: "Ahora puede comenzar con el desarrollo ...",
+  TITULO: "Sistema de Información Docente - KYRON",
+  MENSAJE_INICIAL: "Bienvenido",
 };
 
 var text_en = {

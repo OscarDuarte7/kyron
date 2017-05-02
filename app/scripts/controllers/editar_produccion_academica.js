@@ -40,6 +40,11 @@ angular.module('kyronApp')
         {
           field: 'SubtipoProduccionId.Nombre', displayName: 'Subtipo Producción', width: 300
         },
+        {
+          field: 'Acciones',
+          cellTemplate: '<button class="btn btn-danger btn-circle" ng-click="grid.appScope.editarProduccionAcademica.eliminar(row.entity)"><i class="glyphicon glyphicon-trash"></i></button>&nbsp;<button type="button" class="btn btn-success btn-circle" ng-click="grid.appScope.editarProduccionAcademica.editar(row.entity)"><i class="glyphicon glyphicon-pencil"></i></button>',
+          width: 150
+        }
 
       ]
     };
@@ -92,12 +97,6 @@ angular.module('kyronApp')
 
     self.gridOptions.onRegisterApi = function (gridApi) {
       self.gridApi = gridApi;
-        gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-        self.produccion_actual = row.entity;
-        if (self.experiencia_actual !== null) {
-          self.vista_previa = true;
-        }
-      });
     };
 
     self.limpiar_seleccion = function () {
@@ -105,6 +104,14 @@ angular.module('kyronApp')
       self.tr_produccion_academica = {};
     };
 
+
+
+    self.editar = function(produccion){
+      self.produccion_actual= produccion;
+      if (self.produccion_actual !== null) {
+        self.vista_previa = true;
+      }
+    };
 
     self.gridOptionsDatoSubtipo = {};
     self.gridOptionsDatoSubtipo.enableFiltering = true;
@@ -131,7 +138,8 @@ angular.module('kyronApp')
       produccionAcademicaServices.put('produccion_academica', self.produccion_actual.Id, self.produccion_actual)
         .then(function (response) {
           if (response.data === 'OK') {
-
+            get_produccion_academica();
+              get_dato_produccion();
             swal(
               'Buen trabajo!',
               'Se editó correctamente!',
@@ -160,7 +168,7 @@ angular.module('kyronApp')
     };
 
 
-        self.eliminar = function () {
+        self.eliminar = function (produccion) {
 
       swal({
         title: 'Está seguro?',
@@ -172,9 +180,9 @@ angular.module('kyronApp')
         cancelButtonText: 'Cancelar',
         confirmButtonText: 'Eliminar'
       }).then(function () {
-       self.produccion_actual.FechaDato = new Date();
-       self.produccion_actual.Vigente = false;
-       produccionAcademicaServices.put('produccion_academica', self.produccion_actual.Id, self.produccion_actual)
+       produccion.FechaDato = new Date();
+       produccion.Vigente = false;
+       produccionAcademicaServices.put('produccion_academica', produccion.Id, produccion)
           .then(function (response) {
 
             if (response.data === 'OK') {

@@ -20,7 +20,7 @@ angular.module('kyronApp')
     $scope.menu_service = [];
 
 $scope.cargarMenu = function(){
-    $http.get("http://10.20.2.17/kyron/models/"+$rootScope.rol+".json" ).then(function(response){
+    $http.get("http://localhost:9000/models/"+$rootScope.rol+".json" ).then(function(response){
       $scope.menu_service = response.data;
       console.log($scope.menu_service);
     });

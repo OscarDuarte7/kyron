@@ -74,6 +74,7 @@ angular.module('kyronApp')
       self.experiencia_laboral.FechaDato = new Date();
       self.experiencia_laboral.Validacion = false;
       self.experiencia_laboral.Vigente = true;
+      if(self.experiencia_laboral.FechaInicio < self.experiencia_laboral.FechaFinalizacion){
       experienciaLaboralServices.post('experiencia_laboral', self.experiencia_laboral)
         .then(function (response) {
           console.log(response);
@@ -92,9 +93,15 @@ angular.module('kyronApp')
             );
           }
           self.limpiar_seleccion();
-         
+
         });
-         
+      }else{
+        swal(
+          'Ha ocurrido un error',
+          'La fecha de inicio debe ser menor a la fecha de finalización',
+          'error'
+        );
+      }
     };
 
   });

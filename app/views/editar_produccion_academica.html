@@ -42,8 +42,7 @@
             </div>
         </div>
         <div class="row" align="center" ng-show="editarProduccionAcademica.vista_previa">
-            <button class="btn btn-outline btn-success btn-md" ng-show="!editarProduccionAcademica.experiencia_actual.Validacion" ng-click="editarExperienciaLaboral.guardar()">{{ 'GUARDAR' | translate }} </button>
-            <button class="btn btn-outline btn-danger btn-md" ng-click="editarProduccionAcademica.eliminar()">{{ 'ELIMINAR' | translate }} </button>
+            <button class="btn btn-outline btn-success btn-md" ng-show="!editarProduccionAcademica.produccion_actual.Validacion" ng-click="editarProduccionAcademica.guardar()">{{ 'GUARDAR' | translate }} </button>
             <button class="btn btn-outline btn-primary btn-md" ng-click="editarProduccionAcademica.limpiar_seleccion()">{{ 'CANCELAR' | translate }} </button>
         </div>
     </div>

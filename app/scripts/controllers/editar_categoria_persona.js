@@ -31,6 +31,11 @@ angular.module('kyronApp')
           {
             field: 'FechaDato', displayName: 'Fecha', cellFilter: 'date:"yyyy-MM-dd"', width: 100
           },
+          {
+            field: 'Acciones',
+            cellTemplate: '<button class="btn btn-danger btn-circle" ng-click="grid.appScope.editarCategoriaPersona.eliminar(row.entity)"><i class="glyphicon glyphicon-trash"></i></button>&nbsp;<button type="button" class="btn btn-success btn-circle" ng-click="grid.appScope.editarCategoriaPersona.editar(row.entity)"><i class="glyphicon glyphicon-pencil"></i></button>',
+            width: 150
+          }
           ]
         };
         self.gridOptions.multiSelect = false;
@@ -56,17 +61,18 @@ angular.module('kyronApp')
 
           self.gridOptions.onRegisterApi = function (gridApi) {
           self.gridApi = gridApi;
-          gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-            self.categoria_actual = row.entity;
-            if (self.categoria_actual !== null) {
-              self.vista_previa = true;
-            }
-          });
         };
 
         self.limpiar_seleccion = function () {
           self.vista_previa = null;
           get_categoria_persona();
+        };
+
+        self.editar = function(categoria){
+          self.categoria_actual= categoria;
+          if (self.categoria_persona !== null) {
+            self.vista_previa = true;
+          }
         };
 
 
@@ -77,7 +83,7 @@ angular.module('kyronApp')
       categoriaServices.put('categoria_persona', self.categoria_actual.Id, self.categoria_actual)
         .then(function (response) {
           if (response.data === 'OK') {
-
+                get_categoria_persona();
             swal(
               'Buen trabajo!',
               'Se editó correctamente!',
@@ -109,7 +115,7 @@ angular.module('kyronApp')
     };
 
 
-    self.eliminar = function () {
+    self.eliminar = function (categoria) {
 
       swal({
         title: 'Está seguro?',
@@ -121,19 +127,20 @@ angular.module('kyronApp')
         cancelButtonText: 'Cancelar',
         confirmButtonText: 'Eliminar'
       }).then(function () {
-       self.categoria_actual.FechaDato = new Date();
-       self.categoria_actual.Vigente = false;
-       categoriaServices.put('categoria_persona', self.categoria_actual.Id, self.categoria_actual)
+       categoria.FechaDato = new Date();
+       categoria.Vigente = false;
+       categoriaServices.put('categoria_persona',categoria.Id, categoria)
           .then(function (response) {
 
             if (response.data === 'OK') {
-              get_categoria_persona();
-              self.limpiar_seleccion();
+
               swal(
                 'Eliminado!',
                 'El registro ha sido eliminado.',
                 'success'
               );
+
+                    get_categoria_persona();
             } else {
               swal(
                 'No ha podido ser eliminado!',

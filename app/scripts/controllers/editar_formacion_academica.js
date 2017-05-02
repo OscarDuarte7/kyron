@@ -47,6 +47,11 @@ angular.module('kyronApp')
       {
         field: 'AreaConocimiento', displayName: 'Área de Conocimiento', width: 200
       },
+      {
+        field: 'Acciones',
+        cellTemplate: '<button class="btn btn-danger btn-circle" ng-click="grid.appScope.editarFormacionAcademica.eliminar(row.entity)"><i class="glyphicon glyphicon-trash"></i></button>&nbsp;<button type="button" class="btn btn-success btn-circle" ng-click="grid.appScope.editarFormacionAcademica.editar(row.entity)"><i class="glyphicon glyphicon-pencil"></i></button>',
+        width: 150
+      }
       ]
     };
     self.gridOptions.multiSelect = false;
@@ -86,18 +91,25 @@ angular.module('kyronApp')
 
     self.gridOptions.onRegisterApi = function (gridApi) {
       self.gridApi = gridApi;
-      gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+  /*    gridApi.selection.on.rowSelectionChanged($scope, function (row) {
         self.formacion_actual = row.entity;
         if (self.formacion_actual !== null) {
           self.vista_previa = true;
         }
-      });
+      });*/
     };
+
 
     self.limpiar_seleccion = function () {
       self.vista_previa = null;
     };
 
+    self.editar = function(formacion){
+      self.formacion_actual= formacion;
+      if (self.formacion_actual !== null) {
+        self.vista_previa = true;
+      }
+    };
 
     self.guardar = function () {
       if(self.formacion_actual.Validacion === false){
@@ -123,7 +135,7 @@ angular.module('kyronApp')
           self.limpiar_seleccion();
       }
     };
-    self.eliminar = function () {
+    self.eliminar = function (formacion) {
 
       swal({
         title: 'Está seguro?',
@@ -135,9 +147,9 @@ angular.module('kyronApp')
         cancelButtonText: 'Cancelar',
         confirmButtonText: 'Eliminar'
       }).then(function () {
-       self.formacion_actual.FechaDato = new Date();
-       self.formacion_actual.Vigente = false;
-       formacionAcademicaServices.put('formacion_academica', self.formacion_actual.Id, self.formacion_actual)
+       formacion.FechaDato = new Date();
+       formacion.Vigente = false;
+       formacionAcademicaServices.put('formacion_academica', formacion.Id, formacion)
           .then(function (response) {
 
             if (response.data === 'OK') {
