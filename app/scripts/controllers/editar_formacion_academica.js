@@ -8,7 +8,7 @@
  * Controller of the kyronApp
  */
 angular.module('kyronApp')
-  .controller('EditarFormacionAcademicaCtrl', function (formacionAcademicaServices, $rootScope, $scope) {
+  .controller('EditarFormacionAcademicaCtrl', function (formacionAcademicaServices, $rootScope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -91,12 +91,6 @@ angular.module('kyronApp')
 
     self.gridOptions.onRegisterApi = function (gridApi) {
       self.gridApi = gridApi;
-  /*    gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-        self.formacion_actual = row.entity;
-        if (self.formacion_actual !== null) {
-          self.vista_previa = true;
-        }
-      });*/
     };
 
 

@@ -8,7 +8,7 @@
  * Controller of the kyronApp
  */
 angular.module('kyronApp')
-  .controller('EditarCategoriaPersonaCtrl', function (categoriaServices, $rootScope, $scope) {
+  .controller('EditarCategoriaPersonaCtrl', function (categoriaServices, $rootScope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

@@ -14,7 +14,7 @@ angular.module('kyronApp')
       'AngularJS',
       'Karma'
     ];
-  $rootScope.id = 123;
+
 
     var self = this;
     self.id = $rootScope.id;
@@ -72,7 +72,7 @@ angular.module('kyronApp')
     get_investigacion();
     get_institucion();
     get_tipo_investigacion();
-    
+
 
     self.gridOptions.onRegisterApi = function (gridApi) {
       self.gridApi = gridApi;

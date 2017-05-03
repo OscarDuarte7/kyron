@@ -8,7 +8,7 @@
  * Controller of the kyronApp
  */
 angular.module('kyronApp')
-  .controller('EditarExperienciaLaboralCtrl', function (experienciaLaboralServices, $rootScope, $scope) {
+  .controller('EditarExperienciaLaboralCtrl', function (experienciaLaboralServices, $rootScope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

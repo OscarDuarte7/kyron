@@ -15,7 +15,6 @@ angular.module('kyronApp')
       'Karma'
     ];
 
-    $rootScope.id = 123;
 
     var self = this;
     self.id = $rootScope.id;

@@ -27,6 +27,37 @@ $scope.cargarMenu = function(){
   };
 
   $scope.cargarMenu();
+
+  $scope.cambiarId = function(){
+    if($rootScope.rol === "administrador"){
+    swal({
+  title: 'Ingresar ID',
+  input: 'number',
+  showCancelButton: true,
+  inputValidator: function (value) {
+    return new Promise(function (resolve, reject) {
+      if (value) {
+        resolve();
+      } else {
+        reject('Debe Ingresar un ID!');
+      }
+    });
+  }
+}).then(function (result) {
+  $rootScope.id = parseInt(result);
+  swal({
+    type: 'success',
+    html: 'Usted ingresó el ID: ' + result
+  });
+});}
+else{
+  swal(
+    'Ha ocurrido un error',
+    'No tiene los permisos para realizar esto',
+    'error'
+  );
+}
+  };
 /*
     $scope.menu_service = [
 

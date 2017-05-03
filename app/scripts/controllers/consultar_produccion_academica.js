@@ -83,13 +83,21 @@ angular.module('kyronApp')
       });
     };
 
+    var get_evaluador = function () {
+      produccionAcademicaServices.get('evaluador', $.param({
+        query: "ProduccionAcademicaId.PersonaId:" + self.id + ",ProduccionAcademicaId.Vigente:" + true,
+        limit: 0
+      })).then(function (response) {
+        self.gridOptionsEvaluador.data = response.data;
+      });
+    };
 
     get_produccion_academica();
     get_tipo_produccion();
     get_subtipo_produccion();
     get_opcion_dato();
     get_dato_produccion();
-
+    get_evaluador();
 
     self.gridOptions.onRegisterApi = function (gridApi) {
       self.gridApi = gridApi;
@@ -107,6 +115,23 @@ angular.module('kyronApp')
       { field: 'Valor', headerCellClass: $scope.highlightFilteredHeader,cellFilter: 'filtroDatoProduccion:this' , width: 300 }
     ];
     self.gridOptionsDatoSubtipo.onRegisterApi = function (gridApi) {
+      $timeout(function () {
+        gridApi.grouping.clearGrouping();
+        gridApi.grouping.groupColumn('ProduccionAcademicaId.TituloProduccion');
+        gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+      });
+    };
+
+
+    self.gridOptionsEvaluador = {};
+    self.gridOptionsEvaluador.enableFiltering = true;
+    self.gridOptionsEvaluador.treeRowHeaderAlwaysVisible = false;
+    self.gridOptionsEvaluador.columnDefs = [
+      { field: 'ProduccionAcademicaId.TituloProduccion', displayName: 'Titulo Producción', cellTemplate: '<div ng-if="!col.grouping || col.grouping.groupPriority === undefined || col.grouping.groupPriority === null || ( row.groupHeader && col.grouping.groupPriority === row.treeLevel )" class="ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>', width: 200 },
+      // pre-populated search field
+      { field: 'PersonaId', displayName: 'Evaluador', width: 300 }
+    ];
+    self.gridOptionsEvaluador.onRegisterApi = function (gridApi) {
       $timeout(function () {
         gridApi.grouping.clearGrouping();
         gridApi.grouping.groupColumn('ProduccionAcademicaId.TituloProduccion');

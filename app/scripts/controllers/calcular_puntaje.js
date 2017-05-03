@@ -17,7 +17,7 @@ angular.module('kyronApp')
 
 
     var self = this;
-    self.id = 123;
+    self.id = $rootScope.Id;
 
   //tabla de categoria_persona
     self.gridOptionsCategoria = {
