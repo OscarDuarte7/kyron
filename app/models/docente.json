@@ -1,4 +1,8 @@
-[
+[ {
+    "Id": 1,
+    "Nombre": "Gesión Información Hoja de Vida",
+    "Url": "",
+    "Opciones": [
   {
     "Id": 1,
     "Nombre": "Producción Académica",
@@ -121,4 +125,5 @@
       "Url": "editar_categoria_persona",
       "Opciones": null
     }]
+  } ]
   }]

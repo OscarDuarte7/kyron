@@ -197,16 +197,5 @@
       "Url": "consultar_persona_idioma",
       "Opciones": null
     }]
-    },
-    {
-    "Id": 1,
-    "Nombre": "Puntaje",
-    "Url": "",
-    "Opciones": [{
-      "Id": 1,
-      "Nombre": " Calcular Puntaje",
-      "Url": "calcular_puntaje",
-      "Opciones": null
-    }]
-  }
+    }
   ]

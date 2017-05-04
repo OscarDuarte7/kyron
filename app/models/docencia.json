@@ -1,15 +1,5 @@
 [ {
   "Id": 1,
-  "Nombre": "Puntaje",
-  "Url": "",
-  "Opciones": [{
-    "Id": 1,
-    "Nombre": " Calcular Puntaje",
-    "Url": "calcular_puntaje",
-    "Opciones": null
-  }]
-},{
-  "Id": 1,
   "Nombre": "Validación",
   "Url": "",
   "Opciones": [{
