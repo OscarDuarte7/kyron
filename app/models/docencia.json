@@ -22,7 +22,12 @@
     "Nombre": " Validar Formación Académica",
     "Url": "validar_formacion_academica",
     "Opciones": null
-  }]
+  },{
+      "Id": 5,
+      "Nombre": " Validar Experiencia Docente",
+      "Url": "validar_experiencia_docente",
+      "Opciones": null
+    }]
 }, {
   "Id": 1,
   "Nombre": "Consultas",

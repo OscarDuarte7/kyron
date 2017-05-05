@@ -201,6 +201,11 @@ angular
         controller: 'CalcularPuntajeCtrl',
         controllerAs: 'calcularPuntaje'
       })
+      .when('/validar_experiencia_docente', {
+        templateUrl: 'views/validar_experiencia_docente.html',
+        controller: 'ValidarExperienciaDocenteCtrl',
+        controllerAs: 'validarExperienciaDocente'
+      })
       .otherwise({
         redirectTo: '/'
       });
