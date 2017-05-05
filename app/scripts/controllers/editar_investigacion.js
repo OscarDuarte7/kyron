@@ -41,6 +41,11 @@ angular.module('kyronApp')
       {
         field: 'NombreInvestigacion', displayName: 'Nombre Investigacion', width: 500
       },
+      {
+        field: 'Acciones',
+        cellTemplate: '<button class="btn btn-danger btn-circle" ng-click="grid.appScope.editarInvestigacion.eliminar(row.entity)"><i class="glyphicon glyphicon-trash"></i></button>&nbsp;<button type="button" class="btn btn-success btn-circle" ng-click="grid.appScope.editarInvestigacion.editar(row.entity)"><i class="glyphicon glyphicon-pencil"></i></button>',
+        width: 150
+      },
       ]
     };
     self.gridOptions.multiSelect = false;
@@ -74,16 +79,17 @@ angular.module('kyronApp')
 
     self.gridOptions.onRegisterApi = function (gridApi) {
       self.gridApi = gridApi;
-      gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-        self.investigacion_actual = row.entity;
-        if (self.investigacion_actual !== null) {
-          self.vista_previa = true;
-        }
-      });
     };
 
     self.limpiar_seleccion = function () {
       self.vista_previa = null;
+    };
+
+    self.editar = function(experiencia){
+      self.investigacion_actual= experiencia;
+      if (self.investigacion_actual !== null) {
+        self.vista_previa = true;
+      }
     };
 
 
@@ -104,7 +110,7 @@ angular.module('kyronApp')
             self.limpiar_seleccion();
 
     };
-    self.eliminar = function () {
+  self.eliminar = function (experiencia) {
 
       swal({
         title: 'Está seguro?',
@@ -116,13 +122,13 @@ angular.module('kyronApp')
         cancelButtonText: 'Cancelar',
         confirmButtonText: 'Eliminar'
       }).then(function () {
-       self.investigacion_actual.FechaDato = new Date();
-       self.investigacion_actual.Vigente = false; 
-       investigacionServices.put('investigacion', self.investigacion_actual.Id, self.investigacion_actual)
+      experiencia.FechaDato = new Date();
+      experiencia.Vigente = false;
+       investigacionServices.put('investigacion', experiencia.Id, experiencia)
           .then(function (response) {
 
             if (response.data === 'OK') {
-              get_investigacion();
+    get_investigacion();
               self.limpiar_seleccion();
               swal(
                 'Eliminado!',
@@ -139,6 +145,14 @@ angular.module('kyronApp')
           });
 
       }).catch(swal.noop);
+
+    get_investigacion();
     };
 
-  });
+ 
+
+
+
+
+
+});

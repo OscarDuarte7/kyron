@@ -14,15 +14,16 @@
                     <md-content class="md-padding" layout-wrap>
 
                      
-                        <label>Entidad o Institucion</label>
-                        <input type="text" ng-model="InstitucionId.NombreInstitucion" class="form-control" ng-required="true">
-
+                        <label>Institución o Entidad</label>
+                            <select ng-model="crearExperienciaDocente.experiencia_Docente.InstitucionId.Id" class="form-control">
+                                <option ng-repeat="iInstitucion in crearExperienciaDocente.institucion" ng-value="iInstitucion.Id">{{iInstitucion.NombreInstitucion}} </option>
+                            <select>
 
 
                         <label>Fecha Inicial</label>
                         <input type="date" ng-model="FechaInicio" ng-required="true"  class="form-control">
 
-                        <label>Fecha Finnal</label>
+                        <label>Fecha Final</label>
                         <input type="date" ng-model="FechaFinalizacion" ng-required="true"  class="form-control">
 
 
@@ -31,37 +32,31 @@
                         <input type="text" ng-model="TipoActividad"  class="form-control" ng-required="true">
 
                         <label>Campo de Enseñanza</label>
-                        <input type="text" ng-model="CampoEnseñanza"  class="form-control" ng-required="true">
+                        <input type="text" ng-model="CampoEnsenanza"  class="form-control" ng-required="true">
 
                        
                         <label>Tipo Dedicacion</label>
-                        <select ng-model="tipoProduccion"  class="form-control">
-                          <option ng-repeat="tProduccion in crearExperienciaDocente.tipo_produccion" ng-value="tProduccion.Id">{{tProduccion.Nombre}} </option>
+                        <select ng-model="crearExperienciaDocente.experiencia_Docente.TipoDedicacionId.Id"  class="form-control">
+                          <option ng-repeat="iTipoDedicacion in crearExperienciaDocente.tipo_dedicacion" ng-value="iTipoDedicacion.Id">{{iTipoDedicacion.NombreTipoDedicacion}} </option>
                         </select>
 
+                    </md-content>
 
+                    <md-content class="md-padding" layout-wrap>
+
+                    
                         <label>Cursos</label>
-                        <select ng-model="subtipoProduccion" ng-change="crearExperienciaDocente.getDatoSubtipo(subtipoProduccion)"  class="form-control">
-                          <option ng-repeat="sProduccion in crearExperienciaDocente.subtipo_produccion | filter: {'TipoProduccion':{'Id':tipoProduccion}}" ng-value="sProduccion.Id">{{sProduccion.Nombre}} </option>
-                        </select>
-
-                        <div ng-repeat="input in infoInput track by input.Id">
-                          <label>{{input.DatoId.Nombre}}</label>
-                          <input type="{{input.Dominio.Tipo}}" ng-model="input.Dominio.Valor"  class="form-control" ng-required="true">
-                        </div>
-
-                        <div ng-repeat="select in infoSelect track by select.Id">
-                          <label>{{select.DatoId.Nombre}}</label>
-                          <select ng-model="select.Dominio.Valor"   class="form-control">
-                            <option ng-repeat="opcion in crearExperienciaDocente.opcion_dato  | filter: {'Dato':{'Id':select.DatoId.Id }}" ng-value="opcion.Id" ng-value="opcion.Id">{{opcion.NombreOpcion}} </option>
-                          </select>
-                        </div>
+                        <input type="text" ng-model="Cursos"  class="form-control" ng-required="true">
+                        <input type="button" class="btn btn-primary" value="Añadir" ng-click="crearExperienciaDocente.addCurso()">
 
 
+                    </md-content>
+
+                    
                 </div>
             </div>
             <div class="row" align="center" ng-show="crearExperienciaDocente.vista_previa">
-                <input type="submit" class="btn btn-outline btn-success btn-md" value="Submit">
+                <input type="submit" class="btn btn-outline btn-success btn-md" value="Guardar">
                 <button class="btn btn-outline btn-primary btn-md" ng-click="crearExperienciaDocente.limpiar_seleccion()">Cancelar </button>
             </div>
 
@@ -69,6 +64,8 @@
         </div>
     </div>
 </div>
+
+
 
 <div ng-class="{'col-md-8': crearExperienciaDocente.vista_previa , 'col-md-8 col-md-offset-2': !crearExperienciaDocente.vista_previa}">
   <div class="panel panel-default">

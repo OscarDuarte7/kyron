@@ -31,6 +31,12 @@ angular.module('kyronApp')
       {
         field: 'NivelIdioma.NombreNivel', displayName: 'Nivel', width: 300
       },
+      
+         {
+        field: 'Acciones',
+        cellTemplate: '<button class="btn btn-danger btn-circle" ng-click="grid.appScope.editarPersonaIdioma.eliminar(row.entity)"><i class="glyphicon glyphicon-trash"></i></button>',
+        width: 150
+      }
       ]
     };
     self.gridOptions.multiSelect = false;
@@ -61,14 +67,12 @@ angular.module('kyronApp')
     get_nivel_idioma();
 
 
-    self.gridOptions.onRegisterApi = function (gridApi) {
+        self.gridOptions.onRegisterApi = function (gridApi) {
       self.gridApi = gridApi;
-      gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-        self.idioma_actual = row.entity;
-        if (self.idioma_actual !== null) {
-          self.vista_previa = true;
-        }
-      });
+    };
+
+    self.limpiar_seleccion = function () {
+      self.vista_previa = null;
     };
 
     self.limpiar_seleccion = function () {
@@ -100,7 +104,7 @@ angular.module('kyronApp')
           self.limpiar_seleccion();
       }
     };
-    self.eliminar = function () {
+ self.eliminar = function (experiencia) {
 
       swal({
         title: 'Está seguro?',
@@ -112,13 +116,13 @@ angular.module('kyronApp')
         cancelButtonText: 'Cancelar',
         confirmButtonText: 'Eliminar'
       }).then(function () {
-       self.idioma_actual.FechaDato = new Date();
-       self.idioma_actual.Vigente = false; 
-       personaIdiomaServices.put('persona_idioma', self.idioma_actual.Id, self.idioma_actual)
+      experiencia.FechaDato = new Date();
+      experiencia.Vigente = false;
+       personaIdiomaServices.put('persona_idioma', experiencia.Id, experiencia)
           .then(function (response) {
 
             if (response.data === 'OK') {
-              get_persona_idioma();
+    get_persona_idioma();
               self.limpiar_seleccion();
               swal(
                 'Eliminado!',
@@ -135,6 +139,8 @@ angular.module('kyronApp')
           });
 
       }).catch(swal.noop);
+
+    get_persona_idioma();
     };
 
   });
