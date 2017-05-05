@@ -73,6 +73,7 @@ angular.module('kyronApp')
       self.persona_idioma.FechaDato = new Date();
       self.persona_idioma.Validacion = false;
       self.persona_idioma.Vigente = true;
+      self.persona_idioma.PersonaId = self.id;
       personaIdiomaServices.post('persona_idioma', self.persona_idioma)
         .then(function (response) {
           console.log(response);

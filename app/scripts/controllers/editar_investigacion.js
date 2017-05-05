@@ -8,7 +8,7 @@
  * Controller of the kyronApp
  */
 angular.module('kyronApp')
-  .controller('EditarInvestigacionCtrl', function (investigacionServices, $rootScope, $scope) {
+  .controller('EditarInvestigacionCtrl', function (investigacionServices, $rootScope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -34,9 +34,6 @@ angular.module('kyronApp')
       },
       {
         field: 'FechaFinalizacion', displayName: 'Fecha Finalización', cellFilter: 'date:"yyyy-MM-dd"', width: 100
-      },
-      {
-        field: 'TipoInvestigacion', displayName: 'Tipo Investigacion', width: 300
       },
       {
         field: 'NombreInvestigacion', displayName: 'Nombre Investigacion', width: 500
@@ -149,7 +146,7 @@ angular.module('kyronApp')
     get_investigacion();
     };
 
- 
+
 
 
 

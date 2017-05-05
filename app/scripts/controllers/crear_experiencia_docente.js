@@ -24,9 +24,7 @@ angular.module('kyronApp')
       enableSorting: true,
       enableRowSelection: true,
       enableRowHeaderSelection: false,
-      columnDefs: [{
-        field: 'PersonaId', displayName: 'Persona', width: 300
-      },
+      columnDefs: [
         {
           field: 'InstitucionId.NombreInstitucion', displayName: 'Institucion', width: 200
         },
@@ -50,7 +48,7 @@ angular.module('kyronApp')
       self.gridOptions.multiSelect = false;
     var get_experiencia_docente = function () {
       experienciaDocenteServices.get('experiencia_docente', $.param({
-        query: "Vigente:" + true,
+        query: "PersonaId"+ self.id + ",Vigente:" + true,
         limit: 0
       })).then(function (response) {
         self.gridOptions.data = response.data;
@@ -114,7 +112,7 @@ angular.module('kyronApp')
 
 
     self.addCurso = function () {
-             datacursos.push({ 
+             datacursos.push({
                "NombreCurso": $scope.Cursos,
             });
     };
@@ -133,7 +131,7 @@ var dataExperienciaDocente={
   "Vigente": true
 
 };
-      
+
         experienciaDocenteServices.post("tr_experiencia_docente", { ExperienciaDocente: dataExperienciaDocente, Cursos: datacursos })
         .then(function (response) {
           console.log(response);
@@ -145,6 +143,7 @@ var dataExperienciaDocente={
             );
             get_experiencia_docente();
             get_cursos();
+            datacursos = [];
 
           } else {
             swal(
@@ -156,7 +155,7 @@ var dataExperienciaDocente={
           self.limpiar_seleccion();
 
         });
-     
+
 
 
      };

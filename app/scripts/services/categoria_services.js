@@ -11,7 +11,7 @@ angular.module('kyronApp')
   .factory('categoriaServices', function ($http) {
     // Service logic
     // ...
-    var path = "http://localhost:8081/v1/"; // puerto 8081
+    var path = "http://10.20.2.17:8081/v1/"; // puerto 8081
 
     // Public API here
     return {

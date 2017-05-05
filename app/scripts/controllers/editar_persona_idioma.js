@@ -8,7 +8,7 @@
  * Controller of the kyronApp
  */
 angular.module('kyronApp')
-  .controller('EditarPersonaIdiomaCtrl', function (personaIdiomaServices, $rootScope, $scope) {
+  .controller('EditarPersonaIdiomaCtrl', function (personaIdiomaServices, $rootScope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -31,7 +31,7 @@ angular.module('kyronApp')
       {
         field: 'NivelIdioma.NombreNivel', displayName: 'Nivel', width: 300
       },
-      
+
          {
         field: 'Acciones',
         cellTemplate: '<button class="btn btn-danger btn-circle" ng-click="grid.appScope.editarPersonaIdioma.eliminar(row.entity)"><i class="glyphicon glyphicon-trash"></i></button>',
@@ -42,7 +42,7 @@ angular.module('kyronApp')
     self.gridOptions.multiSelect = false;
     var get_persona_idioma = function () {
       personaIdiomaServices.get('persona_idioma', $.param({
-        query:"Vigente:" + true,
+        query: "PersonaId:" + self.id + ",Vigente:" + true,
         limit: 0
       })).then(function (response) {
         self.gridOptions.data = response.data;

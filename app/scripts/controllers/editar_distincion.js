@@ -8,7 +8,7 @@
  * Controller of the kyronApp
  */
 angular.module('kyronApp')
-  .controller('EditarDistincionCtrl', function (distincionServices, $rootScope, $scope) {
+  .controller('EditarDistincionCtrl', function (distincionServices, $rootScope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -38,7 +38,7 @@ angular.module('kyronApp')
         cellTemplate: '<button class="btn btn-danger btn-circle" ng-click="grid.appScope.editarDistincion.eliminar(row.entity)"><i class="glyphicon glyphicon-trash"></i></button>',
         width: 150
       }
-      
+
       ]
     };
     self.gridOptions.multiSelect = false;
@@ -69,7 +69,7 @@ angular.module('kyronApp')
     self.limpiar_seleccion = function () {
       self.vista_previa = null;
     };
-    
+
     self.eliminar = function (experiencia) {
 
       swal({

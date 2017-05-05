@@ -20,26 +20,23 @@
                             <select ng-model="crearInvestigacion.investigacion.TipoInvestigacionId.Id" class="form-control">
                                 <option ng-repeat="iTipoInvestigacion in crearInvestigacion.tipo_investigacion" ng-value="iTipoInvestigacion.Id">{{iTipoInvestigacion.NombreTipoInvestigacion}} </option>
                             <select>
-                  
+
                             <label>Fecha de inicio</label>
 
                             <input ng-model="crearInvestigacion.investigacion.FechaInicio" type="date" class="form-control" ng-required="true">
-                    
+
                             <label>Fecha de Finalización</label>
 
                             <input ng-model="crearInvestigacion.investigacion.FechaFinalizacion" type="date" class="form-control" ng-required="true">
-                   
+
                             <label>Nombre Investigacion</label>
 
                             <input ng-model="crearInvestigacion.investigacion.NombreInvestigacion" type="text" class="form-control" ng-required="true">
 
-                             <label>Tipo Investigacion</label>
-
-                            <input ng-model="crearInvestigacion.investigacion.TipoInvestigacion" type="text" class="form-control" ng-required="true">
 
                     </md-content>
 
-   
+
                 </div>
             </div>
             <div class="row" align="center" ng-show="crearInvestigacion.vista_previa">

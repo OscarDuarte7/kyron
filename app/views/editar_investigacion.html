@@ -17,38 +17,26 @@
                     <md-content class="md-padding" layout-wrap>
 
                          <label>Institución o Entidad</label>
-                            <select ng-model="editarInvestigacion.investigacion.InstitucionId.Id" class="form-control">
+                            <select ng-model="editarInvestigacion.investigacion_actual.InstitucionId.Id" class="form-control">
                                 <option ng-repeat="iInstitucion in editarInvestigacion.institucion" ng-value="iInstitucion.Id">{{iInstitucion.NombreInstitucion}} </option>
                             <select>
 
                             <label>Tipo Investigacion</label>
-                            <select ng-model="editarInvestigacion.investigacion.TipoInvestigacionId.Id" class="form-control">
+                            <select ng-model="editarInvestigacion.investigacion_actual.TipoInvestigacionId.Id" class="form-control">
                                 <option ng-repeat="iTipoInvestigacion in editarInvestigacion.tipo_investigacion" ng-value="iTipoInvestigacion.Id">{{iTipoInvestigacion.NombreTipoInvestigacion}} </option>
                             <select>
-                  
-                            <label>Fecha de inicio</label>
 
-                            <input ng-model="editarInvestigacion.investigacion.FechaInicio" type="date" class="form-control" ng-required="true">
-                    
-                            <label>Fecha de Finalización</label>
-
-                            <input ng-model="editarInvestigacion.investigacion.FechaFinalizacion" type="date" class="form-control" ng-required="true">
-                   
                             <label>Nombre Investigacion</label>
 
-                            <input ng-model="editarInvestigacion.investigacion.NombreInvestigacion" type="text" class="form-control" ng-required="true">
+                            <input ng-model="editarInvestigacion.investigacion_actual.NombreInvestigacion" type="text" class="form-control" ng-required="true">
 
-                             <label>Tipo Investigacion</label>
 
-                            <input ng-model="editarInvestigacion.investigacion.TipoInvestigacion" type="text" class="form-control" ng-required="true">
-                            
                     </md-content>
 
         </div>
       </div>
       <div class="row" align="center" ng-show="editarInvestigacion.vista_previa">
         <<button class="btn btn-outline btn-success btn-md" ng-show="!editarInvestigacion.investigacion_actual.Validacion" ng-click="editarInvestigacion.guardar()">{{ 'GUARDAR' | translate }} </button>
-        <button class="btn btn-outline btn-danger btn-md" ng-click="editarInvestigacion.eliminar()">{{ 'ELIMINAR' | translate }} </button>
         <button class="btn btn-outline btn-primary btn-md" ng-click="editarInvestigacion.limpiar_seleccion()">{{ 'CANCELAR' | translate }} </button>
       </div>
     </div>

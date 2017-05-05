@@ -38,9 +38,6 @@ angular.module('kyronApp')
         field: 'FechaFinalizacion', displayName: 'Fecha Finalización', cellFilter: 'date:"yyyy-MM-dd"', width: 100
       },
       {
-        field: 'TipoInvestigacion', displayName: 'Tipo Investigacion', width: 300
-      },
-      {
         field: 'NombreInvestigacion', displayName: 'Nombre Investigacion', width: 500
       },
       ]

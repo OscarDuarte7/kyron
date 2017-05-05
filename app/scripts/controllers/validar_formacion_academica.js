@@ -49,7 +49,7 @@ angular.module('kyronApp')
       },
       {
         name: 'Acción',
-        width: 65,
+        width: 70,
         cellEditableCondition: false,
         cellTemplate: '  <div ng-if="row.entity.Validacion == false"> <button class="btn btn-success btn-sm" ng-click="grid.appScope.validarFormacionAcademica.validar(row.entity.Id, row.entity)"> <span class="glyphicon glyphicon-ok-sign"></span>Validar</button> </div>',
       },
