@@ -4,7 +4,7 @@
             Crear Producción Académica
         </div>
         <div class="panel-body">
-              <form ng-submit="crearProduccionAcademica.guardar()">
+              <form name="produccion_form" ng-submit="produccion_form.$valid && crearProduccionAcademica.guardar()">
             <div class="thumbnail">
                 <br>
                 <img src="images/person-flat.png" alt="..." width="150px">
@@ -43,14 +43,14 @@
 
 
                         <label>Tipo de Producción Académica</label>
-                        <select ng-model="tipoProduccion"  class="form-control">
+                        <select ng-model="tipoProduccion"  class="form-control" required>
                           <option ng-repeat="tProduccion in crearProduccionAcademica.tipo_produccion" ng-value="tProduccion.Id">{{tProduccion.Nombre}} </option>
                         </select>
 
 
 
                         <label>Subtipo de Producción Académica</label>
-                        <select ng-model="subtipoProduccion" ng-change="crearProduccionAcademica.getDatoSubtipo(subtipoProduccion)"  class="form-control">
+                        <select ng-model="subtipoProduccion" ng-change="crearProduccionAcademica.getDatoSubtipo(subtipoProduccion)"  class="form-control" required>
                           <option ng-repeat="sProduccion in crearProduccionAcademica.subtipo_produccion | filter: {'TipoProduccion':{'Id':tipoProduccion}}" ng-value="sProduccion.Id">{{sProduccion.Nombre}} </option>
                         </select>
 
@@ -63,7 +63,7 @@
 
                         <div ng-repeat="select in infoSelect track by select.Id">
                           <label>{{select.DatoId.Nombre}}</label>
-                          <select ng-model="select.Dominio.Valor"   class="form-control"  ng-click="obtenerOpcion(select.DatoId.Id)">
+                          <select ng-model="select.Dominio.Valor"   class="form-control"  ng-click="obtenerOpcion(select.DatoId.Id)" required>
                             <option ng-repeat="opcion in crearProduccionAcademica.opcion_dato" ng-value="opcion.Id">{{opcion.NombreOpcion}} </option>
                           </select>
                         </div>
