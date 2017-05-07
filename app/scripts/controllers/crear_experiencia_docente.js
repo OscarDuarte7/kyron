@@ -24,7 +24,9 @@ angular.module('kyronApp')
       enableSorting: true,
       enableRowSelection: true,
       enableRowHeaderSelection: false,
-      columnDefs: [
+      columnDefs: [{
+        field: 'PersonaId', displayName: 'Persona', width: 300
+      },
         {
           field: 'InstitucionId.NombreInstitucion', displayName: 'Institucion', width: 200
         },
@@ -32,7 +34,7 @@ angular.module('kyronApp')
           field: 'TipoActividad', displayName: 'Tipo Actividad', width: 200
         },
         {
-          field: 'CampoEnsenanza', displayName: 'Campo de Enseñanza', width: 100
+          field: 'CampoEnseñanza', displayName: 'Campo de Enseñanza', width: 100
         },
         {
           field: 'FechaInicio', displayName: 'Fecha Incio', width: 100, cellFilter: 'date:"yyyy-MM-dd"'
@@ -42,13 +44,14 @@ angular.module('kyronApp')
         },
         {
           field: 'TipoDedicacionId.NombreTipoDedicacion', displayName: 'Tipo Dedicacion', width: 300
-        },]
-    };
+        },
 
-      self.gridOptions.multiSelect = false;
+      ]
+    };
+    self.gridOptions.multiSelect = false;
     var get_experiencia_docente = function () {
       experienciaDocenteServices.get('experiencia_docente', $.param({
-        query: "PersonaId"+ self.id + ",Vigente:" + true,
+        query: "Vigente:" + true,
         limit: 0
       })).then(function (response) {
         self.gridOptions.data = response.data;
@@ -57,7 +60,8 @@ angular.module('kyronApp')
     };
 
 
-        var get_cursos = function () {
+
+    var get_cursos = function () {
       experienciaDocenteServices.get('cursos', $.param({
         query: "ExperienciaDocenteId.PersonaId:" + self.id + ",ExperienciaDocenteId.Vigente:" + true,
         limit: 0
@@ -115,22 +119,31 @@ angular.module('kyronApp')
              datacursos.push({
                "NombreCurso": $scope.Cursos,
             });
+            $scope.Cursos=null;
     };
 
  self.guardar = function () {
+
+  
 var dataExperienciaDocente={
-  "InstitucionId":self.experiencia_Docente.InstitucionId.Id,
+  "InstitucionId":{
+      "Id":  self.experiencia_Docente.InstitucionId.Id
+  },
   "TipoActividad": $scope.TipoActividad,
   "CampoEnseñanza":$scope.CampoEnsenanza,
   "PersonaId": self.id,
   "Validacion": false,
   "FechaInicio":$scope.FechaInicio,
   "FechaFinalizacion":$scope.FechaFinalizacion,
-  "TipoDedicacionId": self.experiencia_Docente.TipoDedicacionId,
+  "TipoDedicacionId": {
+      "Id": self.experiencia_Docente.TipoDedicacionId.Id
+  },
+  
   "FechaDato": new Date(),
   "Vigente": true
 
 };
+
 
         experienciaDocenteServices.post("tr_experiencia_docente", { ExperienciaDocente: dataExperienciaDocente, Cursos: datacursos })
         .then(function (response) {

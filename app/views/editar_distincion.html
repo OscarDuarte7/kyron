@@ -12,11 +12,32 @@
                     <div class="alert alert-warning" ng-show="editarDistincion.distincion_actual.Validacion">
                         <strong>Alerta</strong> El registro ya ha sido validado y no puede ser modificado.
                     </div>
+                    
+                     <md-content class="md-padding" layout-wrap>
+
+                            <label>Institución o Entidad</label>
+                            <select ng-model="crearDistincion.distincion.InstitucionId.Id" class="form-control">
+                                <option ng-repeat="iInstitucion in crearDistincion.institucion" ng-value="iInstitucion.Id">{{iInstitucion.NombreInstitucion}} </option>
+                            <select>
+
+                  
+                            <label>Fecha</label>
+
+                            <input ng-model="crearDistincion.distincion.Fecha" type="date" class="form-control" ng-required="true">
+      
+                   
+                            <label>Nombre</label>
+
+                            <input ng-model="crearDistincion.distincion.Nombre" type="text" class="form-control" ng-required="true">
+
+
+                    </md-content>
+
 
                 </div>
             </div>
       <div class="row" align="center" ng-show="editarDistincion.vista_previa">
-        <!--<button class="btn btn-outline btn-success btn-md" ng-show="!editarDistincion.experiencia_actual.Validacion" ng-click="editarDistincion.guardar()">{{ 'GUARDAR' | translate }} </button>-->
+        <button class="btn btn-outline btn-success btn-md" ng-show="!editarDistincion.distincion_actual.Validacion" ng-click="editarDistincion.guardar()">{{ 'GUARDAR' | translate }} </button>
         <button class="btn btn-outline btn-primary btn-md" ng-click="editarDistincion.limpiar_seleccion()">{{ 'CANCELAR' | translate }} </button>
       </div>
         </div>

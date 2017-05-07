@@ -8,7 +8,7 @@
  * Controller of the kyronApp
  */
 angular.module('kyronApp')
-  .controller('EditarDistincionCtrl', function (distincionServices, $rootScope) {
+  .controller('EditarDistincionCtrl', function (distincionServices, $rootScope,$scope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -69,6 +69,35 @@ angular.module('kyronApp')
     self.limpiar_seleccion = function () {
       self.vista_previa = null;
     };
+
+    self.editar = function(experiencia){
+      self.distincion_actual= experiencia;
+      if (self.distincion_actual !== null) {
+        self.vista_previa = true;
+      }
+      $scope.Date=self.distincion_actual.FechaDato;
+    };
+
+
+    self.guardar = function () {
+      self.distincion_actual.FechaDato = new Date();
+      distincionServices.put('distincion', self.distincion_actual.Id, self.distincion_actual)
+        .then(function (response) {
+          if (response.data === 'OK') {
+            get_distincion();
+            swal(
+              'Buen trabajo!',
+              'Se editó correctamente!',
+              'success'
+            );
+            self.limpiar_seleccion();
+          }
+      });
+            self.limpiar_seleccion();
+
+    };
+
+
 
     self.eliminar = function (experiencia) {
 

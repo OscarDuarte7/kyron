@@ -47,7 +47,7 @@ angular.module('kyronApp')
 
       ]
     };
-    self.gridOptions.multiSelect = false;
+      self.gridOptions.multiSelect = false;
     var get_experiencia_docente = function () {
       experienciaDocenteServices.get('experiencia_docente', $.param({
         query: "Vigente:" + true,
@@ -57,7 +57,6 @@ angular.module('kyronApp')
         console.log(self.gridOptions.data);
       });
     };
-
 
 
     var get_cursos = function () {

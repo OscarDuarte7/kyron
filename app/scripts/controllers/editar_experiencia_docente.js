@@ -64,7 +64,7 @@ angular.module('kyronApp')
     };
 
     self.limpiar_seleccion = function () {
-      self.vista_previa = !self.vista_previa;
+      
       self.tr_experiencia_docente = {};
     };
 
@@ -106,9 +106,7 @@ angular.module('kyronApp')
 
     self.editar = function(experiencia){
       self.experiencia_actual= experiencia;
-      if (self.experiencia_actual !== null) {
-        self.vista_previa = true;
-      }
+      
     };
 
 self.guardar = function () {

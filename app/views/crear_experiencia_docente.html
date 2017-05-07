@@ -15,9 +15,9 @@
 
                      
                         <label>Institución o Entidad</label>
-                            <select ng-model="crearExperienciaDocente.experiencia_Docente.InstitucionId.Id" class="form-control">
+                            <select ng-model= "crearExperienciaDocente.experiencia_Docente.InstitucionId.Id" class="form-control">
                                 <option ng-repeat="iInstitucion in crearExperienciaDocente.institucion" ng-value="iInstitucion.Id">{{iInstitucion.NombreInstitucion}} </option>
-                            <select>
+                            </select>
 
 
                         <label>Fecha Inicial</label>
@@ -46,7 +46,7 @@
 
                     
                         <label>Cursos</label>
-                        <input type="text" ng-model="Cursos"  class="form-control" ng-required="true">
+                        <input type="text" ng-model="Cursos"  class="form-control" >
                         <input type="button" class="btn btn-primary" value="Añadir" ng-click="crearExperienciaDocente.addCurso()">
 
 
