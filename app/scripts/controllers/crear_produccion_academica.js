@@ -154,6 +154,17 @@ angular.module('kyronApp')
 
     };
 
+      var limpiar_formulario = function(){
+         $scope.ciudad = null;
+         $scope.numeroAutores= null;
+         $scope.pais= null;
+          $scope.tipoProduccion= null;
+         $scope.subtipoProduccion= null;
+         $scope.tituloProduccion= null;
+         $scope.fechaProduccion= null;
+         $scope.infoInput = [];
+         $scope.infoSelect = [];
+      };
 //Método que hace una peticion POST al apiProduccionAcadémica para guardar usando la transacción tr_produccion_academica
     self.guardar = function () {
       var dataProduccionAcademica = {
@@ -204,6 +215,7 @@ angular.module('kyronApp')
             );
             get_produccion_academica();
             get_dato_produccion();
+            limpiar_formulario();
           } else {
             swal(
               'Ha ocurrido un error',
