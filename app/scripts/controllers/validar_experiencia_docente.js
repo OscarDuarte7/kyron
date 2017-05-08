@@ -68,7 +68,7 @@ angular.module('kyronApp')
 
     var get_cursos = function () {
       experienciaDocenteServices.get('cursos', $.param({
-        query: "ExperienciaDocenteId.PersonaId:" + self.id + ",ExperienciaDocenteId.Vigente:" + true,
+        query: "ExperienciaDocenteId.Vigente:" + true,
         limit: 0
       })).then(function (response) {
         self.gridOptionsCursos.data = response.data;
@@ -88,6 +88,7 @@ angular.module('kyronApp')
     self.gridOptionsCursos.enableFiltering = true;
     self.gridOptionsCursos.treeRowHeaderAlwaysVisible = false;
     self.gridOptionsCursos.columnDefs = [
+      { field: 'ExperienciaDocenteId.PersonaId', displayName: 'Persona', cellTemplate: '<div ng-if="!col.grouping || col.grouping.groupPriority === undefined || col.grouping.groupPriority === null || ( row.groupHeader && col.grouping.groupPriority === row.treeLevel )" class="ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>', width: 200 },
       { field: 'ExperienciaDocenteId.InstitucionId.NombreInstitucion', displayName: 'Institucion', cellTemplate: '<div ng-if="!col.grouping || col.grouping.groupPriority === undefined || col.grouping.groupPriority === null || ( row.groupHeader && col.grouping.groupPriority === row.treeLevel )" class="ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>', width: 200 },
       // pre-populated search field
       { field: 'NombreCurso', displayName: 'Curso', width: 300 }
@@ -97,6 +98,7 @@ angular.module('kyronApp')
     self.gridOptionsCursos.onRegisterApi = function (gridApi) {
       $timeout(function () {
         gridApi.grouping.clearGrouping();
+        gridApi.grouping.groupColumn('ExperienciaDocenteId.PersonaId');
         gridApi.grouping.groupColumn('ExperienciaDocenteId.InstitucionId.NombreInstitucion');
         gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
       });

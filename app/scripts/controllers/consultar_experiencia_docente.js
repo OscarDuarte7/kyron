@@ -50,7 +50,7 @@ angular.module('kyronApp')
       self.gridOptions.multiSelect = false;
     var get_experiencia_docente = function () {
       experienciaDocenteServices.get('experiencia_docente', $.param({
-        query: "Vigente:" + true,
+        query: "PersonaId:" + self.id + ",Vigente:" + true,
         limit: 0
       })).then(function (response) {
         self.gridOptions.data = response.data;

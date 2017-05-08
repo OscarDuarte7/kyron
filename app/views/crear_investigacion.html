@@ -51,7 +51,7 @@
 <div ng-class="{'col-md-8': crearInvestigacion.vista_previa , 'col-md-8 col-md-offset-2': !crearInvestigacion.vista_previa}">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Formación Académica
+            Investigación
         </div>
         <div class="panel-body">
             <div ui-grid="crearInvestigacion.gridOptions" ui-grid-auto-resize ui-grid-selection class="ui_grid"></div>
@@ -59,7 +59,7 @@
     </div>
 
     <div class="row" align="center" ng-show="!crearInvestigacion.vista_previa">
-        <button class="btn btn-outline btn-primary btn-md" ng-click="crearInvestigacion.limpiar_seleccion()">Agregar Formación Académica </button>
+        <button class="btn btn-outline btn-primary btn-md" ng-click="crearInvestigacion.limpiar_seleccion()">Agregar Investigación </button>
     </div>
     <br>
 </div>

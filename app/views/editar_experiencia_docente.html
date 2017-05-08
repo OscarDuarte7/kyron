@@ -13,10 +13,41 @@
                         <strong>Alerta</strong> El registro ya ha sido validado y no puede ser modificado.
                     </div>
 
+                    <md-content class="md-padding" layout-wrap>
+
+                     
+                        <label>Institución o Entidad</label>
+                            <select ng-model= "crearExperienciaDocente.experiencia_Docente.InstitucionId.Id" class="form-control">
+                                <option ng-repeat="iInstitucion in crearExperienciaDocente.institucion" ng-value="iInstitucion.Id">{{iInstitucion.NombreInstitucion}} </option>
+                            </select>
+
+
+                        <label>Fecha Inicial</label>
+                        <input type="date" ng-model="FechaInicio" ng-required="true"  class="form-control">
+
+                        <label>Fecha Final</label>
+                        <input type="date" ng-model="FechaFinalizacion" ng-required="true"  class="form-control">
+
+
+
+                        <label>Tipo Actividad</label>
+                        <input type="text" ng-model="TipoActividad"  class="form-control" ng-required="true">
+
+                        <label>Campo de Enseñanza</label>
+                        <input type="text" ng-model="CampoEnsenanza"  class="form-control" ng-required="true">
+
+                       
+                        <label>Tipo Dedicacion</label>
+                        <select ng-model="crearExperienciaDocente.experiencia_Docente.TipoDedicacionId.Id"  class="form-control">
+                          <option ng-repeat="iTipoDedicacion in crearExperienciaDocente.tipo_dedicacion" ng-value="iTipoDedicacion.Id">{{iTipoDedicacion.NombreTipoDedicacion}} </option>
+                        </select>
+
+                    </md-content>
+
                 </div>
             </div>
       <div class="row" align="center" ng-show="editarExperienciaDocente.vista_previa">
-        <!--<button class="btn btn-outline btn-success btn-md" ng-show="!editarExperienciaDocente.experiencia_actual.Validacion" ng-click="editarExperienciaDocente.guardar()">{{ 'GUARDAR' | translate }} </button>-->
+        <button class="btn btn-outline btn-success btn-md" ng-show="!editarExperienciaDocente.experiencia_actual.Validacion" ng-click="editarExperienciaDocente.guardar()">{{ 'GUARDAR' | translate }} </button>
         <button class="btn btn-outline btn-primary btn-md" ng-click="editarExperienciaDocente.limpiar_seleccion()">{{ 'CANCELAR' | translate }} </button>
       </div>
         </div>

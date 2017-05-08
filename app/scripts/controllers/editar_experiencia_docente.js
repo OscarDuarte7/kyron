@@ -17,6 +17,7 @@ angular.module('kyronApp')
  var self = this;
     self.id = $rootScope.id;
     self.vista_previa = false;
+    self.experiencia_actual = null;
     self.tr_experiencia_docente = {};
     self.gridOptions = {
       enableFiltering: true,
@@ -46,7 +47,7 @@ angular.module('kyronApp')
         },
          {
         field: 'Acciones',
-        cellTemplate: '<button class="btn btn-danger btn-circle" ng-click="grid.appScope.editarExperienciaDocente.eliminar(row.entity)"><i class="glyphicon glyphicon-trash"></i></button>',
+        cellTemplate: '<button class="btn btn-danger btn-circle" ng-click="grid.appScope.editarExperienciaDocente.eliminar(row.entity)"><i class="glyphicon glyphicon-trash"></i></button>&nbsp;',
         width: 150
       }
 
@@ -55,7 +56,7 @@ angular.module('kyronApp')
     self.gridOptions.multiSelect = false;
     var get_experiencia_docente = function () {
       experienciaDocenteServices.get('experiencia_docente', $.param({
-        query: "Vigente:" + true,
+        query: "PersonaId:" + self.id + ",Vigente:" + true,
         limit: 0
       })).then(function (response) {
         self.gridOptions.data = response.data;
@@ -77,8 +78,22 @@ angular.module('kyronApp')
       });
     };
 
+            var get_institucion = function () {
+      experienciaDocenteServices.get('institucion', 'limit=0').then(function (response) {
+        self.institucion = response.data;
+      });
+    };
+
+          var get_tipo_dedicacion = function () {
+      experienciaDocenteServices.get('tipo_dedicacion', 'limit=0').then(function (response) {
+        self.tipo_dedicacion = response.data;
+      });
+    };
+
     get_experiencia_docente();
     get_cursos();
+    get_institucion();
+    get_tipo_dedicacion();
 
 
     self.gridOptions.onRegisterApi = function (gridApi) {
@@ -106,6 +121,9 @@ angular.module('kyronApp')
 
     self.editar = function(experiencia){
       self.experiencia_actual= experiencia;
+      if (self.experiencia_actual !== null) {
+        self.vista_previa = true;
+      }
       
     };
 
