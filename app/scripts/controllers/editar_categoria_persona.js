@@ -133,14 +133,15 @@ angular.module('kyronApp')
           .then(function (response) {
 
             if (response.data === 'OK') {
-
+              self.gridOptions.data= [];
+                 get_categoria_persona();
               swal(
                 'Eliminado!',
                 'El registro ha sido eliminado.',
                 'success'
               );
 
-                    get_categoria_persona();
+                   
             } else {
               swal(
                 'No ha podido ser eliminado!',

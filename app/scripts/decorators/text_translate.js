@@ -8,7 +8,7 @@
  * Decorator of the kyronApp
  */
 var text_es = {
-  TITULO: "Sistema de Información Docente - KYRON",
+  TITULO: "Sistema de Gestión de Información Docente - KYRON",
   MENSAJE_INICIAL: "Bienvenido",
 };
 

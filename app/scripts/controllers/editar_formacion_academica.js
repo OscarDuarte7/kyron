@@ -147,6 +147,7 @@ angular.module('kyronApp')
           .then(function (response) {
 
             if (response.data === 'OK') {
+              self.gridOptions.data = [];
               get_formacion_academica();
               self.limpiar_seleccion();
               swal(

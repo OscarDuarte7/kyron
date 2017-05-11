@@ -149,6 +149,7 @@ angular.module('kyronApp')
       });
 
       produccionAcademicaServices.get("opcion_dato", self.paramOpcion).then(function (response) {
+        self.opcion_dato = [];
         self.opcion_dato = response.data;
       });
 

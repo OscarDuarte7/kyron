@@ -132,6 +132,7 @@ angular.module('kyronApp')
           .then(function (response) {
 
             if (response.data === 'OK') {
+              self.gridOptions.data = [];
               get_experiencia_laboral();
               self.limpiar_seleccion();
               swal(

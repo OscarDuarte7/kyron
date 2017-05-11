@@ -110,7 +110,7 @@ angular.module('kyronApp')
 
     self.limpiar_seleccion = function () {
       self.vista_previa = !self.vista_previa;
-      self.tr_produccion_academica = {};
+   
     };
 
 
@@ -212,6 +212,9 @@ angular.module('kyronApp')
           .then(function (response) {
 
             if (response.data === 'OK') {
+              self.gridOptions.data = [];
+              self.gridOptionsDatoSubtipo.data = [];
+              self.gridOptionsEvaluador.data = [];
               get_produccion_academica();
               get_dato_produccion();
               get_evaluador();

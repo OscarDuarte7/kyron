@@ -81,7 +81,7 @@ angular.module('kyronApp')
           if (response.status === 201) {
             swal(
               'Buen trabajo!',
-              'Añadió la formación con éxito',
+              'Añadió la información con éxito',
               'success'
             );
             get_experiencia_laboral();

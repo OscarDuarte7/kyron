@@ -213,8 +213,8 @@ angular
 
 angular.module('kyronApp').run(function ($rootScope) {
 
-  $rootScope.id = 0;
-  $rootScope.rol = "";
+  $rootScope.id = 1015438743;
+  $rootScope.rol = "administrador";
 
 
 
